@@ -1,0 +1,12 @@
+<Window x:Class="MockWinAppInstaller.MainWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        Title="Mock Installer" Height="450" Width="800">
+  <Grid>
+    <StackPanel Margin="16">
+      <TextBlock Text="MockWinAppInstaller" FontSize="24" FontWeight="Bold" />
+      <TextBlock Text="Placeholder UI" Margin="0,8,0,16" />
+      <Button Content="Start" Width="120" Height="32" />
+    </StackPanel>
+  </Grid>
+</Window>
