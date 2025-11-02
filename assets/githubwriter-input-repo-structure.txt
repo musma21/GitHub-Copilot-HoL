@@ -1,0 +1,40 @@
+GitHub-Copilot-HoL/
+│
+├── README.md
+├── LICENSE
+│
+└── MockWinAppInstaller/
+    ├── README.md
+    ├── LICENSE
+    ├── MockWinAppInstaller.sln
+    ├── .gitignore
+    │
+    ├── docs/
+    │   ├── copilot-instructions.md
+    │   ├── design-spec.md
+    │   └── assets/
+    │       ├── architecture-diagram.png
+    │       └── ui-wireframe.png
+    │
+    └── src/
+        ├── MockWinAppInstaller.csproj
+        ├── App.xaml
+        ├── App.xaml.cs
+        ├── MainWindow.xaml
+        ├── MainWindow.xaml.cs
+        ├── ViewModels/
+        │    └── MainViewModel.cs
+        ├── Services/
+        │    ├── FileService.cs
+        │    ├── ChecksumService.cs
+        │    └── UpdateSimulator.cs
+        ├── Properties/
+        │    ├── AssemblyInfo.cs
+        │    ├── Resources.resx
+        │    └── Resources.ko.resx
+        │
+        ├── bin/                     ← ⚙️ Build output (excluded by .gitignore)
+        │   ├── Debug/
+        │   └── Release/
+        │
+        └── obj/                     ← ⚙️ Intermediate build artifacts (excluded)
