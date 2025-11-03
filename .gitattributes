@@ -1,6 +1,22 @@
-# Sensitive customer spec (encrypt with git-crypt)
+## Sensitive customer spec (encrypt with git-crypt)
 MockWinAppInstaller/docs/spec-from-customer.md filter=git-crypt diff=git-crypt
-# All images under docs/assets (design/spec illustrations)
-MockWinAppInstaller/docs/assets/* filter=git-crypt diff=git-crypt
 
-# Central encryption rules; removed .git-crypt/.gitattributes
+## Explicitly encrypted asset images (only current files; add new ones manually)
+MockWinAppInstaller/docs/assets/1-gWFGRDOm6xNWdit3T_zbsl1MRG1w1uXH8i8Q3ksLM=.png filter=git-crypt diff=git-crypt
+MockWinAppInstaller/docs/assets/3XfAtkQkeKEf3iy17Loe2nceuzuFBYMa9-In2VV4nwY=.png filter=git-crypt diff=git-crypt
+MockWinAppInstaller/docs/assets/ctLHWtZRiXsmySfM43WsYhscmGWj4u1DgkTgYmhptiM=.png filter=git-crypt diff=git-crypt
+MockWinAppInstaller/docs/assets/d7B9BQjSFUdCQ9x2zeo3u1lHVo5cCFSdBvU5YN29lH4=.png filter=git-crypt diff=git-crypt
+MockWinAppInstaller/docs/assets/dTNpLunOPMaMgJ9JrNRisM3HoHF5ZzSX7ewg_bQfX30=.png filter=git-crypt diff=git-crypt
+MockWinAppInstaller/docs/assets/HEs9y5KBWspL0u6f9SXlZx2eut5gInDiHTGuJ0NSkEg=.png filter=git-crypt diff=git-crypt
+MockWinAppInstaller/docs/assets/iLgXsKYCFDp5fDCcNPQDXcS1fOHMeGgyyYzt3pzz12A=.png filter=git-crypt diff=git-crypt
+MockWinAppInstaller/docs/assets/jBtTRM-0mZws6IodVqnUkBBpIAYP5TXlkgSnucWF53o=.png filter=git-crypt diff=git-crypt
+MockWinAppInstaller/docs/assets/ktTY7y6ltGrxdeKMFLNDJbtsjgC6MabJvmWgqVwtEP0=.png filter=git-crypt diff=git-crypt
+MockWinAppInstaller/docs/assets/pbW5lNwX1fyYBezrqusjvZw3vhfxVG7pmMVZdYzoHfQ=.png filter=git-crypt diff=git-crypt
+MockWinAppInstaller/docs/assets/tm6u1trpMrvOutV686UMPa10_Ufmgkib_g0XHWSlPLo=.png filter=git-crypt diff=git-crypt
+MockWinAppInstaller/docs/assets/W-u-i8vUcGmPAv3BAHmwbB2duMiCPD_wOFx-3ULOPYQ=.png filter=git-crypt diff=git-crypt
+MockWinAppInstaller/docs/assets/Za0ilqHsFqv9a5vtamWdWciwlCnfke9kmJl9F77OS_o=.png filter=git-crypt diff=git-crypt
+
+## Notes
+# New images must be manually added above to ensure encryption.
+# Keep this file small; avoid wildcards if intentional restriction is required.
+
