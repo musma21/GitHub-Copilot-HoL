@@ -28,19 +28,17 @@ The "githubwrite" Copilot Chat capability uses a structure/spec markdown file as
 - Purge published sensitive history without you running rewrite tools.
 - Resolve complex merge conflicts without human validation.
 
-### 📸 Copilot Chat githubwrite Screenshot
+### 📸 GH Copilot Chat githubwrite Screenshot
 
-Single capture showing a structure spec used in Copilot Chat to drive repository edits:
+Single capture showing a structure spec used in GH Copilot Chat to drive repository edits:
 
 ![Copilot githubwrite panel](assets/githubwrite-in-Copilot-Chat.png)
-
-> If the image does not appear: verify `assets/githubwrite-in-Copilot-Chat.png` exists and is committed.
 
 ---
 
 ## Repository Structure
 
-This document describes the intended directory and file layout for the `GitHub-Copilot-HoL` repository and the `MockWinAppInstaller` WPF example project.
+The below layout is what GH Copilot chat suggested. After creating a repo by yourself, just ask GH Copilot agent to initially touch all directories and files in VSCode : 
 
 ```text
 GitHub-Copilot-HoL/
@@ -84,47 +82,3 @@ GitHub-Copilot-HoL/
         │
         └── obj/                           # Intermediate build artifacts (excluded)
 ```
-
-## Overview
-
-The `GitHub-Copilot-HoL` repository aggregates multiple Hands-on Labs (HoLs) demonstrating GitHub Copilot. The `MockWinAppInstaller` project is a focused WPF example application used to practice prompting and iterative development with Copilot.
-
-## Key Folders
-
-| Path | Purpose |
-|------|---------|
-| `MockWinAppInstaller/docs` | Developer and learning documentation |
-| `MockWinAppInstaller/docs/assets` | Visual assets (architecture, wireframes) |
-| `MockWinAppInstaller/src` | All application source code (MVVM + services) |
-| `MockWinAppInstaller/src/ViewModels` | ViewModel classes for MVVM pattern |
-| `MockWinAppInstaller/src/Services` | Service abstractions (file, checksum, simulation) |
-| `MockWinAppInstaller/src/Properties` | Assembly and resource localization files |
-
-## Suggested Future Extensions
-
-- Add a test project: `MockWinAppInstaller.Tests/`
-- Introduce logging abstraction (e.g., `ILogger` wrapper)
-- Add GitHub Actions workflow: `.github/workflows/build.yml`
-- Expand localization (e.g., `Resources.en.resx`)
-- Capture Architecture Decision Records (ADR) in `docs/adr/`
-
-## Copilot Prompt Ideas
-
-| Goal | Example Prompt |
-|------|----------------|
-| Async checksum | "Generate an async method in ChecksumService to compute SHA256 for a selected file." |
-| MVVM binding | "Refactor MainWindow code-behind into MainViewModel with ICommand bindings." |
-| Progress simulation | "Create a progress-reporting update simulation using IProgress<double>." |
-| Localization | "Suggest keys and values for installer UI localization in Korean." |
-
-## Notes
-
-- The `bin/` and `obj/` folders should remain excluded via `.gitignore`.
-- Duplicate LICENSE inside `MockWinAppInstaller/` is optional—use if sub-project should stand alone.
-- Assets are placeholders until real diagrams and wireframes are added.
-
----
-
-## Maintenance Tips
-- When adding new encrypted assets (git-crypt), append explicit lines to `.gitattributes`.
-- Keep this structure file updated if new lab modules or example projects are added.

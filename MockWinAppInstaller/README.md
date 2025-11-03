@@ -12,6 +12,8 @@ A Proof-of-Concept (PoC) Windows app that simulates a firmware update process us
 
 All specifications and Copilot guidance are stored under  
 [`MockWinAppInstaller/docs/copilot-instructions.md`](./docs/copilot-instructions.md).
+[`MockWinAppInstaller/docs/spec-from-customer.md`](./docs/spec-from-customer.md).
+> ⚠️ spec-from-customer.md is encypted by git-crypt
 
 ## 🚀 Goal
 Provide a lightweight, scriptable mock environment to iterate on installer UX, localization, and protocol workflow without requiring real devices.
@@ -29,6 +31,17 @@ src/
 ## 🛠 Tech Stack
 - .NET 8
 - WPF
+
+## 📁 Key Folders
+
+| Path | Purpose |
+|------|---------|
+| `MockWinAppInstaller/docs` | Developer and learning documentation |
+| `MockWinAppInstaller/docs/assets` | Visual assets (architecture, wireframes) |
+| `MockWinAppInstaller/src` | All application source code (MVVM + services) |
+| `MockWinAppInstaller/src/ViewModels` | ViewModel classes for MVVM pattern |
+| `MockWinAppInstaller/src/Services` | Service abstractions (file, checksum, simulation) |
+| `MockWinAppInstaller/src/Properties` | Assembly and resource localization files |
 
 ## 🌐 Localization
 Resource files: `Properties/Resources.resx`, `Properties/Resources.ko.resx` (extend with UI strings and messages).
