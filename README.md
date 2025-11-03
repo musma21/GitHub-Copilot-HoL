@@ -77,6 +77,8 @@ Disaster recovery outline:
 2. Run `git-crypt unlock` in the repository.
 3. If compromise suspected, publish revocation certificate and rotate to a new key (add new key via `git-crypt add-gpg-user`).
 
+Backup distribution note: gpg-backup sent to Andrew's multiple email accounts with the name of "git-crypt backup - gig on Nov. 3 2025".
+
 Security reminders:
 
 - Never commit the exported private key or revocation certificate.
