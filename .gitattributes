@@ -2,3 +2,5 @@
 MockWinAppInstaller/docs/spec-from-customer.md filter=git-crypt diff=git-crypt
 # All images under docs/assets (design/spec illustrations)
 MockWinAppInstaller/docs/assets/* filter=git-crypt diff=git-crypt
+
+# Central encryption rules; removed .git-crypt/.gitattributes
