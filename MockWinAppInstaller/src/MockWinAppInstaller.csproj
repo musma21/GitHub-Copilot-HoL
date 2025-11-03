@@ -3,6 +3,8 @@
     <OutputType>WinExe</OutputType>
     <TargetFramework>net8.0-windows</TargetFramework>
     <UseWPF>true</UseWPF>
+    <!-- Allows building/restoring Windows-targeting project on non-Windows SDK hosts (still cannot run WPF here) -->
+    <EnableWindowsTargeting>true</EnableWindowsTargeting>
     <Nullable>enable</Nullable>
     <ImplicitUsings>enable</ImplicitUsings>
     <AssemblyName>MockWinAppInstaller</AssemblyName>

@@ -1,40 +1,86 @@
+# Repository Structure
+
+This document describes the intended directory and file layout for the `GitHub-Copilot-HoL` repository and the `MockWinAppInstaller` WPF example project.
+
+```text
 GitHub-Copilot-HoL/
 │
-├── README.md
-├── LICENSE
+├── README.md                        # Repository overview and Hands-on Labs intro
+├── LICENSE                          # Root license
 │
-└── MockWinAppInstaller/
-    ├── README.md
-    ├── LICENSE
-    ├── MockWinAppInstaller.sln
-    ├── .gitignore
+└── MockWinAppInstaller/             # WPF sample application (HoL target)
+    ├── README.md                    # Project-level description
+    ├── LICENSE                      # Project-specific (duplicate or custom) license
+    ├── MockWinAppInstaller.sln      # Visual Studio solution file
+    ├── .gitignore                   # Project-local ignore rules (WPF/VS)
     │
-    ├── docs/
-    │   ├── copilot-instructions.md
-    │   ├── design-spec.md
-    │   └── assets/
-    │       ├── architecture-diagram.png
-    │       └── ui-wireframe.png
+    ├── docs/                        # Documentation and supporting materials
+    │   ├── copilot-instructions.md  # GitHub Copilot usage guidance & prompt examples
+    │   ├── design-spec.md           # Architectural and component design specification
+    │   └── assets/                  # Images referenced by docs
+    │       ├── architecture-diagram.png  # Architecture diagram
+    │       └── ui-wireframe.png          # UI wireframe
     │
-    └── src/
-        ├── MockWinAppInstaller.csproj
-        ├── App.xaml
-        ├── App.xaml.cs
-        ├── MainWindow.xaml
-        ├── MainWindow.xaml.cs
+    └── src/                         # WPF application source code
+        ├── MockWinAppInstaller.csproj    # .NET project file (WPF)
+        ├── App.xaml                       # Application resource root & startup URI
+        ├── App.xaml.cs                    # Application class code-behind
+        ├── MainWindow.xaml                # Main window XAML UI
+        ├── MainWindow.xaml.cs             # Main window code-behind
         ├── ViewModels/
-        │    └── MainViewModel.cs
+        │    └── MainViewModel.cs          # Primary ViewModel (MVVM)
         ├── Services/
-        │    ├── FileService.cs
-        │    ├── ChecksumService.cs
-        │    └── UpdateSimulator.cs
+        │    ├── FileService.cs            # File selection & basic I/O service
+        │    ├── ChecksumService.cs        # Checksum/hash computation service
+        │    └── UpdateSimulator.cs        # Update workflow simulation service
         ├── Properties/
-        │    ├── AssemblyInfo.cs
-        │    ├── Resources.resx
-        │    └── Resources.ko.resx
+        │    ├── AssemblyInfo.cs           # Assembly metadata / ThemeInfo
+        │    ├── Resources.resx            # Neutral (default) resources
+        │    └── Resources.ko.resx         # Korean localized resources
         │
-        ├── bin/                     ← ⚙️ Build output (excluded by .gitignore)
+        ├── bin/                           # Build output (excluded by .gitignore)
         │   ├── Debug/
         │   └── Release/
         │
-        └── obj/                     ← ⚙️ Intermediate build artifacts (excluded)
+        └── obj/                           # Intermediate build artifacts (excluded)
+```
+
+## Overview
+
+The `GitHub-Copilot-HoL` repository aggregates multiple Hands-on Labs (HoLs) demonstrating GitHub Copilot. The `MockWinAppInstaller` project is a focused WPF example application used to practice prompting and iterative development with Copilot.
+
+## Key Folders
+
+| Path | Purpose |
+|------|---------|
+| MockWinAppInstaller/docs | Developer and learning documentation |
+| MockWinAppInstaller/docs/assets | Visual assets (architecture, wireframes) |
+| MockWinAppInstaller/src | All application source code (MVVM + services) |
+| MockWinAppInstaller/src/ViewModels | ViewModel classes for MVVM pattern |
+| MockWinAppInstaller/src/Services | Simple service abstractions (file, checksum, simulation) |
+| MockWinAppInstaller/src/Properties | Assembly and resource localization files |
+
+## Suggested Future Extensions
+
+- Add a test project: `MockWinAppInstaller.Tests/`
+- Introduce logging abstraction (e.g., `ILogger` wrapper)
+- Add GitHub Actions workflow: `.github/workflows/build.yml`
+- Expand localization (e.g., `Resources.en.resx`)
+- Capture Architecture Decision Records (ADR) in `docs/adr/`
+
+## Copilot Prompt Ideas
+
+| Goal | Example Prompt |
+|------|----------------|
+| Async checksum | "Generate an async method in ChecksumService to compute SHA256 for a selected file." |
+| MVVM binding | "Refactor MainWindow code-behind into MainViewModel with ICommand bindings." |
+| Progress simulation | "Create a progress-reporting update simulation using IProgress<double>." |
+| Localization | "Suggest keys and values for installer UI localization in Korean." |
+
+## Notes
+
+- The `bin/` and `obj/` folders should remain excluded via `.gitignore`.
+- Duplicate LICENSE inside `MockWinAppInstaller/` is optional—use if you want the sub-project to be standalone.
+- Assets are placeholders until real diagrams and wireframes are added.
+
+Let me know if you would like this saved to the repository or adapted for onboarding documentation.
