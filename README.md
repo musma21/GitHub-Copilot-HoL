@@ -102,4 +102,8 @@ Licensed under the MIT License. See the `LICENSE` file for full text.
 
 ### Visitor count
 
-![visits](https://hits.seeyoufarm.com/api/count/incr/badge.svg?url=https%3A%2F%2Fgithub.com%2Fmusma21%2FGitHub-Copilot-HoL&count_bg=%2379C83D&title_bg=%23555555&icon=github.svg&icon_color=%23FFFFFF&title=visits&edge_flat=false)
+<!-- markdownlint-disable MD033 -->
+<p align="center">
+  <img src="https://hits.seeyoufarm.com/api/count/incr/badge.svg?url=https%3A%2F%2Fgithub.com%2Fmusma21%2FGitHub-Copilot-HoL&count_bg=%2379C83D&title_bg=%23555555&icon=github.svg&icon_color=%23FFFFFF&title=visits&edge_flat=false" alt="Repository visit count" />
+</p>
+<!-- markdownlint-enable MD033 -->
