@@ -98,7 +98,17 @@ git commit -m "chore: encrypt new diagram"
 
 ## License
 
-Licensed under the MIT License. See the `LICENSE` file for full text.
+This repository is now licensed under the [**Creative Commons Attribution-NonCommercial 4.0 International (CC BY-NC 4.0)**](https://creativecommons.org/licenses/by-nc/4.0/). You are free to:
+
+1. Share — copy and redistribute the material in any medium or format
+2. Adapt — remix, transform, and build upon the material
+
+Under the following terms:
+- **Attribution** — Give appropriate credit, provide a link to the license, and indicate if changes were made.
+- **NonCommercial** — You may not use the material for commercial purposes.
+- **No additional restrictions** — You may not apply legal terms or technological measures that legally restrict others from doing anything the license permits.
+
+See the full license text in the `LICENSE` file.
 
 <!-- markdownlint-disable MD033 -->
 <p align="center">
@@ -108,8 +118,8 @@ Licensed under the MIT License. See the `LICENSE` file for full text.
   <a href="https://github.com/musma21/GitHub-Copilot-HoL/commits/main" title="Last commit">
     <img src="https://img.shields.io/github/last-commit/musma21/GitHub-Copilot-HoL?style=flat-square" alt="last commit" />
   </a>
-  <a href="./LICENSE" title="License: MIT">
-    <img src="https://img.shields.io/github/license/musma21/GitHub-Copilot-HoL?style=flat-square" alt="license" />
+  <a href="./LICENSE" title="License: CC BY-NC 4.0">
+    <img src="https://licensebuttons.net/l/by-nc/4.0/88x31.png" alt="CC BY-NC 4.0" height="1" style="height:19px;vertical-align:text-top; margin-top:-4px;" />
   </a>
 </p>
 <!-- markdownlint-enable MD033 -->
