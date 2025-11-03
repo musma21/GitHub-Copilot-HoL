@@ -1,4 +1,4 @@
-# GitHub Copilot HoL Repository Structure & githubwrite Usage Guide
+# HoL Structure & githubwrite Usage Guide
 
 ## How to use githubwrite
 
