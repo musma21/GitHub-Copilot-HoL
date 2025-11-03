@@ -100,10 +100,16 @@ git commit -m "chore: encrypt new diagram"
 
 Licensed under the MIT License. See the `LICENSE` file for full text.
 
-### Visitor count
-
 <!-- markdownlint-disable MD033 -->
 <p align="center">
-  <img src="https://hits.seeyoufarm.com/api/count/incr/badge.svg?url=https%3A%2F%2Fgithub.com%2Fmusma21%2FGitHub-Copilot-HoL&count_bg=%2379C83D&title_bg=%23555555&icon=github.svg&icon_color=%23FFFFFF&title=visits&edge_flat=false" alt="Repository visit count" />
+  <a href="https://github.com/musma21/GitHub-Copilot-HoL" title="Visitor count">
+    <img src="https://hits.seeyoufarm.com/api/count/incr/badge.svg?url=https%3A%2F%2Fgithub.com%2Fmusma21%2FGitHub-Copilot-HoL&count_bg=%2379C83D&title_bg=%23555555&icon=github.svg&icon_color=%23FFFFFF&title=visits&edge_flat=false" alt="visits" />
+  </a>
+  <a href="https://github.com/musma21/GitHub-Copilot-HoL/commits/main" title="Last commit">
+    <img src="https://img.shields.io/github/last-commit/musma21/GitHub-Copilot-HoL?style=flat-square" alt="last commit" />
+  </a>
+  <a href="./LICENSE" title="License: MIT">
+    <img src="https://img.shields.io/github/license/musma21/GitHub-Copilot-HoL?style=flat-square" alt="license" />
+  </a>
 </p>
 <!-- markdownlint-enable MD033 -->
