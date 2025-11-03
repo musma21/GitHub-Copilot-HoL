@@ -102,9 +102,12 @@ Licensed under the MIT License. See the `LICENSE` file for full text.
 
 <!-- markdownlint-disable MD033 -->
 <p align="center">
-  <a href="https://github.com/musma21/GitHub-Copilot-HoL" title="Visitor count">
-    <img src="https://hits.seeyoufarm.com/api/count/incr/badge.svg?url=https%3A%2F%2Fgithub.com%2Fmusma21%2FGitHub-Copilot-HoL&count_bg=%2379C83D&title_bg=%23555555&icon=github.svg&icon_color=%23FFFFFF&title=visits&edge_flat=false" alt="visits" />
+  <!-- Visitor badge unreachable locally (DNS fail for hits.seeyoufarm.com). Using alternative + fallback. -->
+  <a href="https://github.com/musma21/GitHub-Copilot-HoL" title="Visitor count (alternative badge)">
+    <img src="https://komarev.com/ghpvc/?username=musma21&repo=GitHub-Copilot-HoL&style=flat-square&color=blue" alt="visits" />
   </a>
+  <!-- Fallback static badge if external counters blocked -->
+  <img src="https://img.shields.io/badge/visits-DNS_unavailable-lightgrey?style=flat-square" alt="visits fallback" />
   <a href="https://github.com/musma21/GitHub-Copilot-HoL/commits/main" title="Last commit">
     <img src="https://img.shields.io/github/last-commit/musma21/GitHub-Copilot-HoL?style=flat-square" alt="last commit" />
   </a>
