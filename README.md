@@ -7,7 +7,6 @@ This repository contains various Hands-on Labs (HoLs) demonstrating key GitHub C
 ## Structure
 
 - MockWinAppInstaller: Sample WPF application used in exercises.
-- docs: Design, Copilot usage guidance, and assets.
 
 ## Getting Started
 
@@ -94,3 +93,13 @@ echo "MockWinAppInstaller/docs/assets/new-diagram.png filter=git-crypt diff=git-
 git add .gitattributes MockWinAppInstaller/docs/assets/new-diagram.png
 git commit -m "chore: encrypt new diagram"
 ```
+
+---
+
+## License
+
+Licensed under the MIT License. See the `LICENSE` file for full text.
+
+### Visitor count
+
+![visits](https://hits.seeyoufarm.com/api/count/incr/badge.svg?url=https%3A%2F%2Fgithub.com%2Fmusma21%2FGitHub-Copilot-HoL&count_bg=%2379C83D&title_bg=%23555555&icon=github.svg&icon_color=%23FFFFFF&title=visits&edge_flat=false)
