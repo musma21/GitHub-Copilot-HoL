@@ -52,3 +52,30 @@ CodeCoverage/
 *.VisualState.xml
 TestResult.xml
 nunit-*.xml
+ 
+# =========================
+# Editor & OS artifacts
+# =========================
+
+# Vim swap/backup/session files
+*.swp
+*.swo
+*.swx
+*~
+.*.swp
+.netrwhist
+Session.vim
+tags
+
+# macOS Finder metadata
+.DS_Store
+.AppleDouble
+.LSOverride
+Icon?
+._*
+
+# VSCode (conservative ignores; keep settings/launch/tasks if desired)
+.vscode/*.code-snippets
+.vscode/.history/
+.vscode/ipch/
+.vscode/configurationCache/
