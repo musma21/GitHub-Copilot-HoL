@@ -64,8 +64,9 @@ Prefix scope-local changes with: `installer:` (e.g. `installer: add progress can
 
 - Testing: `.github/instructions/MockWinAppInstaller.testing.instructions.md` → defines minimum coverage & test principles.
 - Pitfalls: `.github/instructions/MockWinAppInstaller.pitfalls.instructions.md` → lists recurring errors and mitigations.
+- Coding Conventions: `.github/instructions/MockWinAppInstaller.codeing-convention-instructions.md` → condensed C# style & patterns referencing official Microsoft guide.
 
-> Keeping these separate keeps the base lean and reduces repetition; future modules (e.g. `refactor` or `deviation`) can be added similarly.
+> Keeping these separate keeps the base lean and reduces repetition; future modules (e.g. `refactor`, `deviation`) can be added similarly. Coding conventions file prevents style noise from bloating functional rules.
 
 ## Last Updated Annotation
 
