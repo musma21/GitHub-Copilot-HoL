@@ -1,5 +1,3 @@
-applyTo: "MockWinAppInstaller/src/**"
-description: "Minimal C# + WPF MVVM coding conventions (delta over global)."
 ---
 applyTo: "MockWinAppInstaller/src/**"
 description: "Minimal C# + WPF MVVM coding conventions (delta over global)."
