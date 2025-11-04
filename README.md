@@ -4,7 +4,7 @@ This repository contains various Hands-on Labs (HoLs) demonstrating key **GitHub
 
 ## 🧪 HoLs
 
-- [**MockWinAppInstaller**](./MockWinAppInstaller/README.md): a sample WPF application so as to demonstrate how to build an application just based on a few screeshots and function specifications, from the scratch (leveraging copilot-instructions.md)  
+- [**MockWinAppInstaller**](./MockWinAppInstaller/README.md): a sample WPF application so as to deliver concise concepts of GH Copilot custom instrunctions, practical usage in your real dev environments, and the best practices to maximize it, by demonstrating how to build an application just based on a few screeshots and function specifications, from the scratch
 
 ---
 
