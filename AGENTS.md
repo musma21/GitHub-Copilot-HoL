@@ -1,6 +1,6 @@
 # Repository Agents Configuration (AGENTS.md)
 
-Purpose: Role/style tags only; model not auto-switched. Full rationale: see `docs/AGENTS-commentary.md`. Reference: <https://code.visualstudio.com/docs/copilot/customization/custom-instructions#_use-an-agentsmd-file>. Model switch: selecting full model locks it.
+Purpose: Role/style tags only; model not auto-switched. Full rationale: see `MockWinAppInstaller/docs/AGENTS-commentary.md`. Reference: <https://code.visualstudio.com/docs/copilot/customization/custom-instructions#_use-an-agentsmd-file>. Model switch: selecting full model locks it.
 
 ## Agent: git-mini
 
@@ -51,10 +51,10 @@ v1.4 (2025-11-05) add code-mini agent (micro diff focus) retained ≤70 lines.
 @git-mini push current branch
 @term-mini Define MVVM in one sentence
 @arch-pro Evaluate async checksum cancellation
-More examples: see docs/AGENTS-commentary.md
+More examples: see MockWinAppInstaller/docs/AGENTS-commentary.md
 
 ## Future Extensions (Reserved)
 
 test-analyst, perf-review (post profiling), security-audit (approval + sanitized context).
 
-End of AGENTS.md (stable headings; minimal ingestion). See `docs/AGENTS-commentary.md` for depth.
+End of AGENTS.md (stable headings; minimal ingestion). See `MockWinAppInstaller/docs/AGENTS-commentary.md` for depth.
