@@ -43,10 +43,21 @@ src/
 | `MockWinAppInstaller/src/Services` | Service abstractions (file, checksum, simulation) |
 | `MockWinAppInstaller/src/Properties` | Assembly and resource localization files |
 
+## 🧩 Instruction Modules
+
+| Scope | File | Purpose |
+|-------|------|---------|
+| Global | `.github/copilot-instructions.md` | Repository-wide baseline rules |
+| Path Base | `.github/instructions/MockWinAppInstaller.instructions.md` | Core delta for installer project |
+| Path Testing | `.github/instructions/MockWinAppInstaller.testing.instructions.md` | Minimal test coverage guidance |
+| Path Pitfalls | `.github/instructions/MockWinAppInstaller.pitfalls.instructions.md` | Common mistakes & mitigations |
+
 ## 🌐 Localization
+
 Resource files: `Properties/Resources.resx`, `Properties/Resources.ko.resx` (extend with UI strings and messages).
 
 ## ▶️ Running (Windows)
+
 ```bash
 # From solution root (future .sln placement)
 dotnet build MockWinAppInstaller/src/MockWinAppInstaller.csproj

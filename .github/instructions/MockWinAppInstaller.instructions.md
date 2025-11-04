@@ -1,8 +1,6 @@
 ---
 applyTo: "MockWinAppInstaller/**"
-version: 1.0
 description: "Base path-specific delta rules for MockWinAppInstaller (WPF MVVM firmware/update simulation)."
-lastUpdated: 2025-11-05
 ---
 
 # Path-Specific Instructions (Base): MockWinAppInstaller

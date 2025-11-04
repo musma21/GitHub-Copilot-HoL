@@ -1,7 +1,5 @@
 ---
-applyTo:
-  - "MockWinAppInstaller/src/**/*.cs"
-  - "MockWinAppInstaller/src/**/*.xaml"
+applyTo: "MockWinAppInstaller/src/**"
 description: "Testing guidance for MockWinAppInstaller path (minimal required coverage)."
 ---
 
