@@ -1,100 +1,62 @@
+applyTo: "MockWinAppInstaller/src/**"
+description: "Minimal C# + WPF MVVM coding conventions (delta over global)."
 ---
 applyTo: "MockWinAppInstaller/src/**"
-description: "Condensed C# coding conventions for MockWinAppInstaller (WPF MVVM) referencing official Microsoft guidance."
+description: "Minimal C# + WPF MVVM coding conventions (delta over global)."
 ---
 
-# Coding Conventions: MockWinAppInstaller
-
-> Delta rules supplement global & base path-specific instructions. Keep implementation consistent, readable, and testable.
-> Reference: [Microsoft C# Coding Conventions](https://learn.microsoft.com/en-us/dotnet/csharp/fundamentals/coding-style/coding-conventions)
+# Coding Conventions: MockWinAppInstaller (Minimal)
+> Delta only; relies on global security/workflow. Keep logic testable & UI thin.
 
 ## Naming
-
-- Types, public methods, properties: PascalCase.
-- Private fields: camelCase; prefix with `_` only if clarity needed (avoid Hungarian).
-- Interfaces: leading `I` (e.g. `IUpdateService`).
-- Async methods suffix: `Async` (e.g. `RunUpdateAsync`).
-- Cancellation tokens named `cancellationToken`.
+MUST PascalCase (types/public); camelCase private fields; I* for interfaces; Async suffix; cancellationToken param name.
 
 ## Namespaces & Files
+MUST file-scoped namespace; ONE public class per file; file name matches type; AVOID mixing styles.
 
-- Use file-scoped namespace (`namespace MockWinAppInstaller;`) unless multiple types require block.
-- One public class per file when practical.
+## Usings
+MUST at top outside namespace; SHOULD order System*, third-party, local; REMOVE unused.
 
-## Using Directives
+## Layout
+MUST 4 spaces (no tabs); CONSISTENT brace style; SHOULD methods ≤50 LOC; AVOID >120 column lines.
 
-- Place `using` outside namespace at top.
-- Order: System*, third-party, project-local (no blank lines between categories unless long list).
-- Remove unused usings (enable IDE cleanup).
+## Properties & Fields
+MUST prefer auto-properties; backing field only for logic; SHOULD init-only/record for immutable config; AVOID complex getters.
 
-## Layout & Formatting
+## Null & Guards
+MUST early guard (ArgumentNullException); RETURN early to avoid deep nesting.
 
-- Indent with 4 spaces; no tabs.
-- Braces on new line for types/methods (Allman) OR project-wide decision: adopt default .NET style (leave consistent as existing code); do not mix.
-- Keep method length focused (<50 LOC); extract helpers when exceeding.
-
-## Fields vs Properties
-
-- Prefer auto-properties; use backing field only for logic in getter/setter.
-- Immutable config via `record` or init-only properties where feasible.
-
-## Null Handling & Guards
-
-- Use early guard clauses: `if (arg is null) throw new ArgumentNullException(nameof(arg));`
-- Avoid nested `if` pyramids; return early.
-
-## Async & Tasks
-
-- Avoid `.Result` / `.Wait()` on Tasks (deadlock risk); use `await`.
-- Use `ConfigureAwait(false)` only in library code; app code can omit.
-- Pass cancellation token through async call chain; do not ignore.
+## Async
+MUST await (no .Result/.Wait()); MUST propagate cancellationToken; SHOULD ConfigureAwait(false) only in libraries; AVOID fire-and-forget without handling.
 
 ## Exceptions
-
-- Throw specific exceptions (ArgumentException, InvalidOperationException) vs generic.
-- Do not swallow exceptions silently; log or rethrow with context.
+MUST throw specific types; AVOID empty catch; SHOULD wrap to add context when rethrowing.
 
 ## LINQ & Collections
+MUST Any() over Count()>0; SHOULD break long chains; SHOULD `ObservableCollection<T>` only if UI needs; AVOID repeated enumeration.
 
-- Favor clarity over chaining complexity; break long LINQ queries into local variables.
-- Use `Any()` instead of `Count() > 0`.
+## Strings & Localization
+MUST interpolate; MUST localize user-visible text (EN key first then KO); AVOID concatenated phrase fragments.
 
-## Strings & Interpolation
+## Comments
+SHOULD XML docs for public/complex logic; TODO with issue ref; AVOID large commented blocks.
 
-- Use string interpolation `$"Checksum: {value}"` over `string.Format` unless culture-specific formatting required.
-- Localize UI/user-facing text via resources; no inline hard-coded Korean/English strings.
+## MVVM Commands
+MUST read-only ICommand props; MUST keep business logic out of code-behind; SHOULD single SetProperty helper; AVOID heavy UI thread work.
 
-## Comments & Docs
+## DI (Future)
+SHOULD constructor: required services first; AVOID service locator; introduce interface only for multi-impl or test isolation.
 
-- XML doc comments only for public API or complex logic; avoid redundant comments.
-- Use TODO with issue reference: `// TODO(#123): refine progress algorithm`.
-
-## ViewModel & Commands
-
-- Command fields: `public ICommand StartUpdateCommand { get; }` (read-only).
-- Keep UI thread logic minimal; heavy work offloaded to service layer.
-
-## Dependency Injection (Future Ready)
-
-- If DI introduced, constructor parameter order: required services first, optional config later.
-- Avoid service locator pattern.
-
-## Unsafe / Reflection
-
-- Avoid `dynamic`/reflection unless approved (Ask Before list applies).
+## Reflection/Dynamic
+AVOID unless approved; MUST justify in commit body.
 
 ## File Naming
+MUST match primary type; interface suffix only if clarity improves.
 
-- Match primary type name (e.g. `UpdateSimulator.cs`).
-- Suffix interfaces with service function only if clarity improved (`IChecksumService`).
-
-## Git Hygiene (Code Context)
-
-- Do not commit commented-out blocks; remove or justify.
-- Keep diff noise low (avoid whitespace-only changes).
+## Git Hygiene
+MUST no dead/commented code; SHOULD minimal diff noise; AVOID mixing style + logic in one commit.
 
 ## Deviation
-
-- If a lab requires style variance (e.g. tab indentation for teaching), annotate commit body: `Deviation(CodingConventions): reason`.
+Commit body line: Deviation(CodingConventions): reason
 
 Last updated: 2025-11-05
