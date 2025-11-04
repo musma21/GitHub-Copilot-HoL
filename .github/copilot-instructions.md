@@ -22,7 +22,7 @@ Lab file; no plaintext sensitive assets; learning outcomes; diff rationale; buil
 ## Troubleshooting
 Re-provide constraints if drift; ask user to rank priorities; propose upgrade path; restate active constraints after long guidance.
 ## Glossary
-History purge=git rewrite; Attributes=.gitattributes; Spec=sensitive design doc; HoL=Hands-on Lab; Revocation cert=GPG invalidate doc; cmtpsh=commit and push all changes.
+History purge=git rewrite; Attributes=.gitattributes; Spec=sensitive design doc; HoL=Hands-on Lab; Revocation cert=GPG invalidate doc; cmtpsh=commit and push all changes; gitpull=fetch and merge changes from remote.
 ## Response Protocol
 Significant= >3 files OR public API OR new external dep. For significant: plan + impact + wait confirm; small diffs otherwise; summarize security steps; report Build/Lint/Test PASS/FAIL.
 ## Safety Reminder
