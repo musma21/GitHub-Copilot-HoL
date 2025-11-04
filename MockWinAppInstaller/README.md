@@ -45,12 +45,25 @@ src/
 
 ## 🧩 Instruction Modules
 
+### Core Instructions (Minimal Ingestion)
+
 | Scope | File | Purpose |
 |-------|------|---------|
 | Global | `.github/copilot-instructions.md` | Repository-wide baseline rules |
 | Path Base | `.github/instructions/MockWinAppInstaller.instructions.md` | Core delta for installer project |
 | Path Testing | `.github/instructions/MockWinAppInstaller.testing.instructions.md` | Minimal test coverage guidance |
 | Path Pitfalls | `.github/instructions/MockWinAppInstaller.pitfalls.instructions.md` | Common mistakes & mitigations |
+| Agents | `AGENTS.md` | Role/style tags (git-mini, term-mini, code-mini, arch-pro) |
+
+### Commentary Files (Onboarding & Extended Rationale)
+
+For new team members or detailed context, see:
+
+- **Global guidance**: `MockWinAppInstaller/docs/copilot-instructions-commentary.md`
+- **Path-specific patterns**: `MockWinAppInstaller/docs/path-specific-instructions-commentary.md`
+- **Agent profiles & escalation**: `MockWinAppInstaller/docs/AGENTS-commentary.md`
+
+These commentary files expand on rules, provide examples, and explain trade-offs not included in the minimal instruction files.
 
 ## 🌐 Localization
 
