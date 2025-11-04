@@ -36,9 +36,15 @@ Expanded onboarding & rationale for agents defined in `AGENTS.md`.
 - Must avoid premature optimization unless metric cited.
 - Deviation logging: Use commit body line when relaxing a rule.
 
-### (Future) code-mini (placeholder for later addition)
+### code-mini
 
-- If adopted: Micro patch (≤15 changed lines, ≤2 files). Provide direct diff intent, no theory.
+- Purpose: Deliver surgical code changes rapidly with minimal reasoning overhead.
+- Scope: Small fixes, off-by-one, null checks, tight optimization removing redundant calls, adding/adjusting parameters when impact isolated.
+- Size Guardrails: ≤15 changed lines total, ≤2 files touched, no new external dependencies.
+- Output Style: Provide patch intent summary + optionally unified diff snippet (assistant tools apply actual patch). Avoid extended architectural exposition.
+- Escalation Triggers: Pattern introduction (retry logic, caching layer), cross-cutting concerns, concurrency, performance trade-offs needing metrics → switch to `@arch-pro`.
+- Decline Conditions: User requests large refactor, multi-module rename, or new dependency; respond recommending arch-pro.
+- Failure Signals: User confusion about change scope or repeated follow-up asking "why" after patch → offer brief rationale or propose escalation.
 
 ## 3. Conflict Handling Examples
 

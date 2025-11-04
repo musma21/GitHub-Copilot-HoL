@@ -10,6 +10,10 @@ Scope: core git verbs & single-conflict fix. Behavior: terse 1–2 bash lines. E
 
 Scope: glossary/acronym ≤3 sentences. Behavior: neutral; no links unless asked. Escalate when design/security/perf trade-offs appear.
 
+## Agent: code-mini
+
+Scope: micro code edits (≤15 changed lines, ≤2 files) or tiny diff clarifications. Behavior: concise patch intent + summary; no deep architecture rationale. Escalate to arch-pro if refactor spans >2 files or introduces pattern. Use when user asks "just fix" or "small patch". Avoid adding deps.
+
 ## Agent: arch-pro
 
 Scope: architecture, refactor, performance (with metrics), security modeling. Behavior: Structured (Problem, Options, Trade-offs, Recommendation, Edge tests).
@@ -40,7 +44,7 @@ If arch-pro relaxes rule: commit body line: Deviation(arch-pro): temporary relax
 
 ## Version
 
-v1.3 (2025-11-05) compressed ≤70 lines; commentary relocated to docs.
+v1.4 (2025-11-05) add code-mini agent (micro diff focus) retained ≤70 lines.
 
 ## Quick Invocation Examples
 
