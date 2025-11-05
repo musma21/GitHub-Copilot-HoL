@@ -1,5 +1,12 @@
 # Customizing GitHub Copilot Responses
 
+> 더 상세한 배경과 원본 예시는 `customizing-GHCP-response-extended.md` 문서를 참고하세요. 아래 링크들은 이 Hands-on Lab에서 실제로 사용되는 지침 파일들입니다.
+>
+> - Repository-wide: `.github/copilot-instructions.md`
+> - Path-specific: `.github/instructions/MockWinAppInstaller.instructions.md`, `.github/instructions/MockWinAppInstaller.testing.instructions.md`, `.github/instructions/MockWinAppInstaller.pitfalls.instructions.md`, `.github/instructions/MockWinAppInstaller.codeing-convention-instructions.md`
+> - Agents: `AGENTS.md`
+> - Prompt files 위치: `.github/prompts/`
+
 짧은 요약:
 
 - 세 가지 축: Repository Instructions / Path-Specific / Agent Instructions / Prompt Files.
@@ -49,10 +56,12 @@
 ## 4. Agent Instructions (AGENTS.md)
 
 설정:
+
 - VSCode: `chat.useAgentsMdFile`, `chat.useNestedAgentsMdFiles` 활성.
 - 루트 `AGENTS.md` (Nested 다수는 Preview 기능).
 
 간단 예:
+
 
 ```markdown
 Agent: git-mini
@@ -99,7 +108,7 @@ Explain DNP vs MODBUS protocol choice for firmware update (trade-offs).
 VSCode Settings Sync 활성 → Instruction/Prompt 관련 설정 자동 동기화.
 (이미지: VSCode Settings Sync UI)
 
-![VSCode Settings Sync UI](assets/7l8lNSUoeC8PMV8ygpo-2VE6nISPCmFlXOd8SdtYPrk=.png "Settings Sync enable screen")
+![VSCode Settings Sync UI](assets/settings-sync-enable.png "Settings Sync enable screen")
 
 ## 7. Best Practices
 
@@ -161,7 +170,9 @@ Async: use async/await; avoid raw Promise chains.
 | Instruction 길이 초과로 핵심 누락 | 글자 수 제한 준수 + 핵심 우선 |
 | Prompt 파일에 문단형 장문 | 한 줄 한 작업으로 재구성 |
 | 다크 테마 스크린샷 가독성 저하 | 밝은 테마 재캡처 + 크롭 + 강조 |
-| 해시형 이미지 파일명 의미 없음 | 차후 의미 기반 이름 재정의 |
+| 해시형 이미지 파일명 의미 없음 | 의미 기반 파일명으로 교체 |
+
+> 긴 지침(예: 15줄 이상 서술형)이 불가피할 경우 그대로 넣기보다 목적별로 작게 쪼개어 여러 짧은 bullet/문장으로 나누면 모델이 요약 손실 없이 더 안정적으로 따릅니다. 예: “테스트 전략” 장문의 문단 → “경계값 포함”, “부정 케이스 최소 1개”, “비동기 취소 시나리오 추가” 처럼 분할.
 
 ## 10. References
 
