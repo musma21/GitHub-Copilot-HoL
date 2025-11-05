@@ -9,4 +9,8 @@
     <ImplicitUsings>enable</ImplicitUsings>
     <AssemblyName>MockWinAppInstaller</AssemblyName>
   </PropertyGroup>
+  <ItemGroup>
+    <!-- WMI / PnP device detection for USB & MTP devices -->
+    <PackageReference Include="System.Management" Version="8.0.0" />
+  </ItemGroup>
 </Project>

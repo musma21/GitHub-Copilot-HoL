@@ -1,0 +1,22 @@
+Session Command / Request Log - 2025-11-05
+Chronological high-level user intents & key assistant actions.
+
+1. UI 정확히 재현 - Legacy installer style WPF layout constructed (MainWindow.xaml grid + cards).
+2. 언어 메뉴 오른쪽 정렬 - Adjusted menu alignment; introduced localization scaffold.
+3. 하드 코드 절대 하지 말고 다 리소스팩 - Added Resources.resx / Resources.ko.resx and LocalizedStrings service.
+4. 파일 선택부터 해보자 - Implemented BrowseFile command with OpenFileDialog, size + checksum display.
+5. C:\TEMP에 복사… 프로그래스바 - Added UpdateSimulator async copy + progress reporting.
+6. 프로그래스바 원래대로 되돌려 - Reset logic after completion integrated.
+7. IP 설정 (segmented 입력) - Added IpSettingsWindow with four octets & validation.
+8. 레지스트리 저장 10개 - Implemented MRU persistence (RecentIps, capped at 10) in HKCU.
+9. USB 사용 체크 / 자동 인식 - Added checkbox + initial removable drive detection.
+10. 휴대폰 연결시 인식 / 제거시 해제 - Extended detection via WMI (System.Management) for broader device classes.
+11. USB-b 타입으로 한정 - Refined heuristic to focus on mass/storage style devices; filtered out hubs/displays.
+12. 체크섬 오른쪽, 기본 공백, 사후 대상 체크섬 검증 - Reordered checksum UI, blank default, destination verification.
+13. 추가 로컬라이제이션 키 - Added status, error, USB, mismatch keys to resx files.
+14. 문서화 요청 - Began adding file and method header comments (this session).
+15. README 갱신 요구 - Updated README with feature summary & registry documentation.
+16. 레지스트리 위치 보여줘 - Pending: Query HKCU\Software\MockWinAppInstaller for RecentIps value.
+17. 오늘 명령 텍스트로 저장 - This log file created.
+
+End of log.

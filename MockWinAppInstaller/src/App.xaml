@@ -1,7 +1,14 @@
 <Application x:Class="MockWinAppInstaller.App"
              xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:local="clr-namespace:MockWinAppInstaller.Services"
              StartupUri="MainWindow.xaml">
   <Application.Resources>
+    <ResourceDictionary>
+      <ResourceDictionary.MergedDictionaries>
+        <ResourceDictionary Source="Styles/InstallerStyles.xaml" />
+      </ResourceDictionary.MergedDictionaries>
+      <local:LocalizedStrings x:Key="Loc" />
+  </ResourceDictionary>
   </Application.Resources>
 </Application>

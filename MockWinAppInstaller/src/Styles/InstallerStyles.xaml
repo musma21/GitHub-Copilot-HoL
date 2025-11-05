@@ -1,0 +1,114 @@
+<!-- ========================================================================
+     File: InstallerStyles.xaml
+     Purpose: Central style & resource dictionary for mock installer (colors,
+              buttons, progress, typography, spacing, reusable card border).
+     Notes:
+       * Colors emulate a legacy installer gray aesthetic.
+       * PrimaryButton intentionally subdued (gray) per user request.
+       * ProgressBar template simplified for deterministic fill rectangle.
+       * Keep style changes minimal to honor layout freeze agreement.
+     ======================================================================== -->
+<ResourceDictionary xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+                    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
+  <!-- Core Brushes -->
+  <Color x:Key="InstallerWindowBackgroundColor">#F5F5F5</Color>
+  <Color x:Key="InstallerMenuBackgroundColor">#ECECEC</Color>
+  <Color x:Key="InstallerStatusBackgroundColor">#ECECEC</Color>
+  <Color x:Key="InstallerBorderColor">#B0B0B0</Color>
+  <Color x:Key="InstallerCardBackgroundColor">#FFFFFF</Color>
+  <Color x:Key="InstallerAccentColor">#2D6EB4</Color>
+
+  <SolidColorBrush x:Key="InstallerWindowBackground" Color="{StaticResource InstallerWindowBackgroundColor}" />
+  <SolidColorBrush x:Key="InstallerMenuBackground" Color="{StaticResource InstallerMenuBackgroundColor}" />
+  <SolidColorBrush x:Key="InstallerStatusBackground" Color="{StaticResource InstallerStatusBackgroundColor}" />
+  <SolidColorBrush x:Key="InstallerBorderBrush" Color="{StaticResource InstallerBorderColor}" />
+  <SolidColorBrush x:Key="InstallerCardBackground" Color="{StaticResource InstallerCardBackgroundColor}" />
+  <SolidColorBrush x:Key="InstallerAccentBrush" Color="{StaticResource InstallerAccentColor}" />
+
+  <!-- Spacing (Thickness) -->
+  <Thickness x:Key="SpaceXS">2</Thickness>
+  <Thickness x:Key="SpaceSM">4</Thickness>
+  <Thickness x:Key="SpaceMD">8</Thickness>
+  <Thickness x:Key="SpaceLG">16</Thickness>
+  <Thickness x:Key="SpaceXL">24</Thickness>
+
+  <!-- Typography -->
+  <Style x:Key="TitleText" TargetType="TextBlock">
+    <Setter Property="FontSize" Value="18" />
+    <Setter Property="FontWeight" Value="SemiBold" />
+    <Setter Property="Margin" Value="0,0,0,8" />
+  </Style>
+  <Style x:Key="SectionHeaderText" TargetType="TextBlock">
+    <Setter Property="FontSize" Value="14" />
+    <Setter Property="FontWeight" Value="SemiBold" />
+    <Setter Property="Margin" Value="0,0,0,4" />
+  </Style>
+  <Style x:Key="MutedText" TargetType="TextBlock">
+    <Setter Property="Foreground" Value="#666" />
+  </Style>
+
+  <!-- Card Border Style -->
+  <Style x:Key="CardBorder" TargetType="Border">
+    <Setter Property="Background" Value="{StaticResource InstallerCardBackground}" />
+    <Setter Property="BorderBrush" Value="{StaticResource InstallerBorderBrush}" />
+    <Setter Property="BorderThickness" Value="1" />
+    <Setter Property="Padding" Value="8" />
+  </Style>
+
+  <!-- Primary Action Button (legacy gray look) -->
+  <Style x:Key="PrimaryButton" TargetType="Button">
+    <Setter Property="MinWidth" Value="120" />
+    <Setter Property="Height" Value="30" />
+    <Setter Property="Margin" Value="0,0,8,0" />
+    <Setter Property="Foreground" Value="#222" />
+    <Setter Property="Background" Value="#E2E2E2" />
+    <Setter Property="BorderBrush" Value="#A8A8A8" />
+    <Setter Property="BorderThickness" Value="1" />
+    <Setter Property="Padding" Value="10,0" />
+    <Setter Property="FontSize" Value="12" />
+    <Setter Property="Cursor" Value="Hand" />
+    <Setter Property="Template">
+      <Setter.Value>
+        <ControlTemplate TargetType="Button">
+          <Border Background="{TemplateBinding Background}" BorderBrush="{TemplateBinding BorderBrush}" BorderThickness="{TemplateBinding BorderThickness}" CornerRadius="2" Padding="{TemplateBinding Padding}">
+            <ContentPresenter HorizontalAlignment="Center" VerticalAlignment="Center" />
+          </Border>
+        </ControlTemplate>
+      </Setter.Value>
+    </Setter>
+    <Style.Triggers>
+      <Trigger Property="IsMouseOver" Value="True">
+        <Setter Property="Background" Value="#D0D0D0" />
+        <Setter Property="BorderBrush" Value="#909090" />
+      </Trigger>
+      <Trigger Property="IsPressed" Value="True">
+        <Setter Property="Background" Value="#B8B8B8" />
+        <Setter Property="BorderBrush" Value="#7A7A7A" />
+      </Trigger>
+      <Trigger Property="IsEnabled" Value="False">
+        <Setter Property="Opacity" Value="0.5" />
+      </Trigger>
+    </Style.Triggers>
+  </Style>
+
+  <!-- ProgressBar Style -->
+  <Style x:Key="InstallerProgressBar" TargetType="ProgressBar">
+    <Setter Property="Foreground" Value="{StaticResource InstallerAccentBrush}" />
+    <Setter Property="Background" Value="#DADADA" />
+    <Setter Property="Height" Value="20" />
+    <Setter Property="BorderBrush" Value="{StaticResource InstallerBorderBrush}" />
+    <Setter Property="BorderThickness" Value="1" />
+    <Setter Property="Template">
+      <Setter.Value>
+        <ControlTemplate TargetType="ProgressBar">
+          <Border Background="{TemplateBinding Background}" BorderBrush="{TemplateBinding BorderBrush}" BorderThickness="{TemplateBinding BorderThickness}" CornerRadius="2" Padding="1">
+            <Grid x:Name="PART_Track">
+              <Rectangle x:Name="PART_Indicator" Fill="{TemplateBinding Foreground}" HorizontalAlignment="Left" />
+            </Grid>
+          </Border>
+        </ControlTemplate>
+      </Setter.Value>
+    </Setter>
+  </Style>
+
+</ResourceDictionary>

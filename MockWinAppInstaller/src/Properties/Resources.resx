@@ -4,4 +4,43 @@
   <resheader name="version"><value>2.0</value></resheader>
   <resheader name="reader"><value>System.Resources.ResXResourceReader, System.Windows.Forms, ...</value></resheader>
   <resheader name="writer"><value>System.Resources.ResXResourceWriter, System.Windows.Forms, ...</value></resheader>
+  <data name="Menu_Program" xml:space="preserve"><value>Program</value></data>
+  <data name="Menu_OpenAppImage" xml:space="preserve"><value>Open (App Image)</value></data>
+  <data name="Menu_Exit" xml:space="preserve"><value>Exit</value></data>
+  <data name="Menu_Settings" xml:space="preserve"><value>Settings</value></data>
+  <data name="Menu_CommModelSelect" xml:space="preserve"><value>Select Communication Model</value></data>
+  <data name="Menu_IpSettings" xml:space="preserve"><value>IP Settings</value></data>
+  <data name="Menu_Language" xml:space="preserve"><value>Language</value></data>
+  <data name="Language_Korean" xml:space="preserve"><value>Korean</value></data>
+  <data name="Language_English" xml:space="preserve"><value>English</value></data>
+  <data name="Label_AppImage" xml:space="preserve"><value>App Image:</value></data>
+  <data name="Label_FileSize" xml:space="preserve"><value>File size:</value></data>
+  <data name="Label_Checksum" xml:space="preserve"><value>Checksum:</value></data>
+  <data name="Label_MemoryInit" xml:space="preserve"><value>Memory Init</value></data>
+  <data name="Label_ChecksumToggle" xml:space="preserve"><value>Checksum</value></data>
+  <data name="Button_SelectApplication" xml:space="preserve"><value>Select Patch</value></data>
+  <data name="Button_UpdateProgram" xml:space="preserve"><value>Program Update</value></data>
+  <data name="Label_ConnectionInfo" xml:space="preserve"><value>Connection Info :</value></data>
+  <data name="Label_IP" xml:space="preserve"><value>IP :</value></data>
+  <data name="Label_Status" xml:space="preserve"><value>Status :</value></data>
+  <data name="Label_ModuleSelect" xml:space="preserve"><value>Module Select:</value></data>
+  <data name="Status_Idle" xml:space="preserve"><value>Idle</value></data>
+  <data name="Status_IpSame" xml:space="preserve"><value>IP unchanged</value></data>
+  <data name="Status_IpChanged" xml:space="preserve"><value>IP change detected</value></data>
+  <data name="Status_NoFileSelected" xml:space="preserve"><value>No file selected</value></data>
+  <data name="Status_PatchInProgress" xml:space="preserve"><value>Patch in progress</value></data>
+  <data name="Status_PatchComplete" xml:space="preserve"><value>Patch complete</value></data>
+  <data name="Status_PatchError" xml:space="preserve"><value>Patch error</value></data>
+  <data name="Status_ChecksumMismatch" xml:space="preserve"><value>Checksum mismatch</value></data>
+  <data name="Status_FileLoadComplete" xml:space="preserve"><value>File load complete</value></data>
+  <data name="Status_LanguageChangeFailed" xml:space="preserve"><value>Language change failed</value></data>
+  <data name="App_Title" xml:space="preserve"><value>Mock Installer</value></data>
+  <data name="IpDialog_Title" xml:space="preserve"><value>IP Settings</value></data>
+  <data name="IpDialog_CurrentIp" xml:space="preserve"><value>Current IP:</value></data>
+  <data name="IpDialog_NewIp" xml:space="preserve"><value>New IP:</value></data>
+  <data name="IpDialog_Save" xml:space="preserve"><value>Save</value></data>
+  <data name="IpDialog_Cancel" xml:space="preserve"><value>Cancel</value></data>
+  <data name="IpDialog_Invalid" xml:space="preserve"><value>Invalid IP format</value></data>
+  <data name="IpDialog_UsbUse" xml:space="preserve"><value>Use USB</value></data>
+  <data name="IpDialog_UsbNotConnected" xml:space="preserve"><value>USB device not detected</value></data>
 </root>

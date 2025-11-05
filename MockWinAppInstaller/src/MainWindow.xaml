@@ -1,12 +1,126 @@
+<!-- ========================================================================
+    File: MainWindow.xaml
+    Purpose: Primary shell window for mock installer.
+    Features: Menu (Program/Settings/Language), status bar, two main cards
+            (file selection + update progress). Layout frozen per user request.
+    Localization: All visible labels bound via LocalizedStrings static resource.
+    Notes: Checksum label/value repositioned; progress reset after completion.
+    ======================================================================== -->
 <Window x:Class="MockWinAppInstaller.MainWindow"
-        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
-        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
-        Title="Mock Installer" Height="450" Width="800">
-  <Grid>
-    <StackPanel Margin="16">
-      <TextBlock Text="MockWinAppInstaller" FontSize="24" FontWeight="Bold" />
-      <TextBlock Text="Placeholder UI" Margin="0,8,0,16" />
-      <Button Content="Start" Width="120" Height="32" />
-    </StackPanel>
-  </Grid>
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    Title="{Binding Source={StaticResource Loc}, Path=AppTitle}"
+        Width="1062" Height="218"
+        ResizeMode="NoResize"
+        WindowStartupLocation="CenterScreen"
+        Topmost="True"
+        Background="{DynamicResource InstallerWindowBackground}">
+    <DockPanel Margin="0,0,10,0">
+        <!-- Menu with right-aligned Language selector restored -->
+        <DockPanel DockPanel.Dock="Top" Background="{DynamicResource InstallerMenuBackground}">
+            <Menu DockPanel.Dock="Left" Background="{DynamicResource InstallerMenuBackground}" BorderBrush="{DynamicResource InstallerBorderBrush}">
+                <MenuItem Header="{Binding Source={StaticResource Loc}, Path=MenuProgram}">
+                    <MenuItem Header="{Binding Source={StaticResource Loc}, Path=MenuOpenAppImage}" Command="{Binding BrowseAppImageCommand}" />
+                    <Separator/>
+                    <MenuItem Header="{Binding Source={StaticResource Loc}, Path=MenuExit}" Command="{Binding ExitCommand}" />
+                </MenuItem>
+                <MenuItem Header="{Binding Source={StaticResource Loc}, Path=MenuSettings}">
+                    <MenuItem Header="{Binding Source={StaticResource Loc}, Path=MenuCommModelSelect}" Command="{Binding OpenCommModelDialogCommand}" />
+                    <MenuItem Header="{Binding Source={StaticResource Loc}, Path=MenuIpSettings}" Command="{Binding OpenIpSettingsCommand}" />
+                </MenuItem>
+            </Menu>
+            <Menu DockPanel.Dock="Right" Background="{DynamicResource InstallerMenuBackground}" BorderBrush="{DynamicResource InstallerBorderBrush}">
+                <MenuItem Header="{Binding Source={StaticResource Loc}, Path=MenuLanguage}">
+                    <MenuItem Header="{Binding Source={StaticResource Loc}, Path=LanguageKorean}" Command="{Binding SetLanguageKoreanCommand}" />
+                    <MenuItem Header="{Binding Source={StaticResource Loc}, Path=LanguageEnglish}" Command="{Binding SetLanguageEnglishCommand}" />
+                </MenuItem>
+            </Menu>
+        </DockPanel>
+
+        <!-- Status Bar -->
+        <Border DockPanel.Dock="Bottom" Background="{DynamicResource InstallerMenuBackground}" BorderBrush="{DynamicResource InstallerBorderBrush}" Padding="4">
+            <DockPanel>
+                <StackPanel Orientation="Horizontal">
+                    <TextBlock Text="{Binding Source={StaticResource Loc}, Path=LabelConnectionInfo}" />
+                    <TextBlock Text="{Binding Source={StaticResource Loc}, Path=LabelIP}" Margin="6,0,0,0" />
+                    <TextBlock Text="{Binding ConnectionIp}" FontWeight="Bold" Margin="2,0,0,0" />
+                    <TextBlock Text="{Binding Source={StaticResource Loc}, Path=LabelStatus}" Margin="12,0,0,0" />
+                    <TextBlock Text="{Binding StatusText}" Margin="2,0,0,0" />
+                </StackPanel>
+                <TextBlock Text="{Binding LastTimestamp}" DockPanel.Dock="Right" />
+            </DockPanel>
+        </Border>
+
+        <!-- Main Content Redesigned -->
+        <Grid Margin="16,12,16,8">
+            <Grid.RowDefinitions>
+                <RowDefinition Height="Auto" />
+                <RowDefinition Height="Auto" />
+                <RowDefinition Height="*" />
+            </Grid.RowDefinitions>
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="*" />
+                <ColumnDefinition Width="*" />
+            </Grid.ColumnDefinitions>
+
+            <!-- Card: App Image & Details -->
+            <Border Grid.Row="0" Grid.Column="0" Style="{DynamicResource CardBorder}" Margin="0,0,478,12" Grid.ColumnSpan="2">
+                <StackPanel>
+                    <TextBlock Text="{Binding Source={StaticResource Loc}, Path=LabelAppImage}" Style="{StaticResource SectionHeaderText}" />
+                    <DockPanel Margin="0,0,0,6">
+                        <TextBox Text="{Binding AppImagePath}" IsReadOnly="True" Margin="0,0,8,0" MinWidth="360" Width="456" />
+                        <Button Content="..." Width="32" Command="{Binding BrowseAppImageCommand}" />
+                    </DockPanel>
+                    <Grid Margin="0,0,0,4">
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="Auto"/>
+                            <ColumnDefinition Width="Auto"/>
+                            <ColumnDefinition Width="24"/>
+                            <ColumnDefinition Width="Auto"/>
+                            <ColumnDefinition Width="Auto"/>
+                            <ColumnDefinition Width="24"/>
+                            <ColumnDefinition Width="Auto"/>
+                            <ColumnDefinition Width="Auto"/>
+                            <ColumnDefinition Width="*"/>
+                            <ColumnDefinition Width="Auto"/>
+                        </Grid.ColumnDefinitions>
+                        <TextBlock Grid.Column="0" Text="{Binding Source={StaticResource Loc}, Path=LabelFileSize}" />
+                        <TextBlock Grid.Column="1" Text="{Binding FileSizeDisplay}" />
+                        <!-- Reordered: Label then value on its right -->
+                        <TextBlock Grid.Column="3" Text="{Binding Source={StaticResource Loc}, Path=LabelChecksum}" Margin="19,0,5,0" />
+                        <TextBlock Grid.Column="4" Text="{Binding ChecksumDisplay}" FontWeight="SemiBold" />
+                        <CheckBox Grid.Column="6" Content="{Binding Source={StaticResource Loc}, Path=LabelMemoryInit}" IsChecked="{Binding IsMemoryInitEnabled}" Grid.ColumnSpan="3" Margin="49,0,99,0" />
+                        <CheckBox Grid.Column="7" Content="{Binding Source={StaticResource Loc}, Path=LabelChecksumToggle}" IsChecked="{Binding IsChecksumEnabled}" Grid.ColumnSpan="2" Margin="140,0,7,0" />
+                        <Button Grid.Column="8" Content="{Binding Source={StaticResource Loc}, Path=ButtonSelectApplication}" Command="{Binding SelectModuleCommand}" Margin="226,-2,14,2" />
+                    </Grid>
+                    <StackPanel Orientation="Horizontal" Margin="0,4,0,0">
+                        <TextBlock Text="{Binding Source={StaticResource Loc}, Path=LabelModuleSelect}" Margin="0,0,6,0" />
+                        <ComboBox ItemsSource="{Binding Modules}" SelectedItem="{Binding SelectedModule}" MinWidth="220" Height="19" />
+                    </StackPanel>
+                </StackPanel>
+            </Border>
+
+            <!-- Card: Update Progress -->
+            <Border Grid.Row="0" Grid.Column="1" Style="{DynamicResource CardBorder}" Margin="49,0,0,12">
+                <Grid>
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="Auto" />
+                        <RowDefinition Height="Auto" />
+                        <RowDefinition Height="Auto" />
+                    </Grid.RowDefinitions>
+                    <TextBlock Grid.Row="0" Text="{Binding Source={StaticResource Loc}, Path=ButtonUpdateProgram}" Style="{StaticResource SectionHeaderText}" />
+                    <DockPanel Grid.Row="1" Margin="0,4,0,0">
+                        <Button Content="{Binding Source={StaticResource Loc}, Path=ButtonUpdateProgram}" Command="{Binding StartUpdateCommand}" Style="{StaticResource PrimaryButton}" Height="20" Click="Button_Click" />
+                        <TextBlock Text="{Binding StatusText}" Margin="12,0,0,0" VerticalAlignment="Center" />
+                        <TextBlock Text="{Binding ProgressPercent}" Margin="12,0,0,0" VerticalAlignment="Center" />
+                    </DockPanel>
+                    <ProgressBar Grid.Row="2" Margin="0,6,0,0" Minimum="0" Maximum="100" Value="{Binding ProgressValue}" Style="{DynamicResource InstallerProgressBar}" />
+                </Grid>
+            </Border>
+
+            <!-- Filler / Future Expansion rows left empty intentionally -->
+            <Border Grid.Row="1" Grid.Column="0" Background="Transparent" />
+            <Border Grid.Row="1" Grid.Column="1" Background="Transparent" />
+        </Grid>
+    </DockPanel>
 </Window>

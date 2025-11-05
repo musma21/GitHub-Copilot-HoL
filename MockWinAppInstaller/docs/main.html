@@ -1,0 +1,261 @@
+import { useState } from 'react'
+import { useKV } from '@github/spark/hooks'
+import { X, FolderOpen, Upload } from '@phosphor-icons/react'
+import { Button } from '@/components/ui/button'
+import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from '@/components/ui/select'
+import { Checkbox } from '@/components/ui/checkbox'
+import { Label } from '@/components/ui/label'
+import { Progress } from '@/components/ui/progress'
+import { toast } from 'sonner'
+
+interface FileInfo {
+  name: string
+  path: string
+  size: number
+  checksum: string
+}
+
+function App() {
+  const [selectedModel, setSelectedModel] = useKV('selected-model', 'GIPAM3000 두꺼비(61850)')
+  const [fileInfo, setFileInfo] = useState<FileInfo | null>(null)
+  const [memoryErase, setMemoryErase] = useState(false)
+  const [checksumVerify, setChecksumVerify] = useState(false)
+  const [isUploading, setIsUploading] = useState(false)
+  const [uploadProgress, setUploadProgress] = useState(0)
+  const [connectionIP] = useState('172.30.0.33')
+  const [lastUpdate, setLastUpdate] = useKV('last-update', '')
+
+  const models = [
+    'GIPAM3000 두꺼비(61850)',
+    'GIPAM3000 표준(61850)',
+    'GIPAM2000 두꺼비(61850)',
+    'GIPAM2000 표준(61850)',
+  ]
+
+  const calculateChecksum = (content: string): string => {
+    let sum = 0
+    for (let i = 0; i < content.length; i++) {
+      sum = (sum + content.charCodeAt(i)) & 0xFFFF
+    }
+    return sum.toString(16).toUpperCase().padStart(4, '0')
+  }
+
+  const formatFileSize = (bytes: number): string => {
+    if (bytes < 1024) return `${bytes} B`
+    if (bytes < 1024 * 1024) return `${(bytes / 1024).toFixed(2)} KB`
+    if (bytes < 1024 * 1024 * 1024) return `${(bytes / (1024 * 1024)).toFixed(2)} MB`
+    return `${(bytes / (1024 * 1024 * 1024)).toFixed(2)} GB`
+  }
+
+  const handleFileSelect = (event: React.ChangeEvent<HTMLInputElement>) => {
+    const file = event.target.files?.[0]
+    if (!file) return
+
+    const reader = new FileReader()
+    reader.onload = (e) => {
+      const content = e.target?.result as string
+      const checksum = calculateChecksum(content)
+      
+      setFileInfo({
+        name: file.name,
+        path: file.name,
+        size: file.size,
+        checksum: checksum
+      })
+      
+      toast.success('파일이 선택되었습니다')
+    }
+    reader.readAsText(file)
+  }
+
+  const handleProgramUpdate = async () => {
+    if (!fileInfo) {
+      toast.error('파일을 먼저 선택해주세요')
+      return
+    }
+
+    setIsUploading(true)
+    setUploadProgress(0)
+
+    const duration = 3000
+    const steps = 100
+    const stepDuration = duration / steps
+
+    for (let i = 0; i <= steps; i++) {
+      await new Promise(resolve => setTimeout(resolve, stepDuration))
+      setUploadProgress(i)
+    }
+
+    const now = new Date()
+    const timestamp = `${now.getFullYear()}.${String(now.getMonth() + 1).padStart(2, '0')}.${String(now.getDate()).padStart(2, '0')} ${String(now.getHours()).padStart(2, '0')}:${String(now.getMinutes()).padStart(2, '0')}:${String(now.getSeconds()).padStart(2, '0')}`
+    
+    setLastUpdate(timestamp)
+    setIsUploading(false)
+    toast.success('프로그램 업데이트 완료')
+  }
+
+  return (
+    <div className="h-screen flex flex-col bg-background font-['Inter']">
+      <div className="flex items-center justify-between px-3 py-2 bg-card border-b border-border">
+        <div className="flex items-center gap-2">
+          <div className="w-4 h-4 bg-accent rounded-sm flex items-center justify-center text-[10px]">
+            📦
+          </div>
+          <span className="text-sm font-medium">G3K_EmbeddedSerial</span>
+        </div>
+        <div className="flex items-center gap-1">
+          <button className="w-8 h-6 hover:bg-muted flex items-center justify-center rounded">
+            <div className="w-3 h-0.5 bg-foreground"></div>
+          </button>
+          <button className="w-8 h-6 hover:bg-muted flex items-center justify-center rounded">
+            <div className="w-3 h-3 border border-foreground"></div>
+          </button>
+          <button className="w-8 h-6 hover:bg-destructive hover:text-destructive-foreground flex items-center justify-center rounded">
+            <X size={16} weight="bold" />
+          </button>
+        </div>
+      </div>
+
+      <div className="flex gap-4 px-3 py-2 bg-muted border-b border-border">
+        <button className="text-sm hover:bg-card px-2 py-1 rounded">프로그램</button>
+        <button className="text-sm hover:bg-card px-2 py-1 rounded">설정</button>
+      </div>
+
+      <div className="flex-1 p-4 overflow-auto">
+        <div className="max-w-6xl mx-auto space-y-4">
+          <div className="flex justify-end">
+            <div className="flex items-center gap-2">
+              <Label className="text-sm">모델선택 :</Label>
+              <Select value={selectedModel} onValueChange={setSelectedModel}>
+                <SelectTrigger className="w-[300px] h-8 text-sm">
+                  <SelectValue />
+                </SelectTrigger>
+                <SelectContent>
+                  {models.map(model => (
+                    <SelectItem key={model} value={model} className="text-sm">
+                      {model}
+                    </SelectItem>
+                  ))}
+                </SelectContent>
+              </Select>
+            </div>
+          </div>
+
+          <div className="border border-border bg-card rounded">
+            <div className="px-3 py-2 bg-muted border-b border-border">
+              <span className="text-sm font-medium">프로그램정보</span>
+            </div>
+            <div className="p-4 space-y-3">
+              <div className="grid grid-cols-[120px_1fr] gap-2 text-sm">
+                <span>App Image :</span>
+                <div className="flex items-center gap-2">
+                  <span className="font-['JetBrains_Mono'] text-muted-foreground">
+                    {fileInfo?.path || 'File Path Information'}
+                  </span>
+                  <label>
+                    <input
+                      type="file"
+                      className="hidden"
+                      onChange={handleFileSelect}
+                      accept=".bin,.hex,.elf"
+                    />
+                    <Button size="sm" variant="outline" className="h-7 text-xs" asChild>
+                      <span className="cursor-pointer">
+                        <FolderOpen size={14} className="mr-1" />
+                        파일선택
+                      </span>
+                    </Button>
+                  </label>
+                </div>
+              </div>
+
+              <div className="grid grid-cols-[120px_1fr] gap-2 text-sm items-center">
+                <span>File size</span>
+                <span className="font-['JetBrains_Mono']">
+                  {fileInfo ? formatFileSize(fileInfo.size) : ''}
+                </span>
+              </div>
+
+              <div className="grid grid-cols-[120px_1fr_auto] gap-4 text-sm items-center">
+                <span></span>
+                <div className="flex items-center gap-2">
+                  <span>Checksum :</span>
+                  <span className="font-['JetBrains_Mono'] font-medium">
+                    {fileInfo?.checksum || 'FFFF'}
+                  </span>
+                </div>
+                <div className="flex items-center gap-4">
+                  <div className="flex items-center gap-2">
+                    <Checkbox 
+                      id="memory-erase" 
+                      checked={memoryErase}
+                      onCheckedChange={(checked) => setMemoryErase(checked as boolean)}
+                    />
+                    <Label htmlFor="memory-erase" className="text-xs cursor-pointer">
+                      메모리초기화
+                    </Label>
+                  </div>
+                  <div className="flex items-center gap-2">
+                    <Checkbox 
+                      id="checksum-verify" 
+                      checked={checksumVerify}
+                      onCheckedChange={(checked) => setChecksumVerify(checked as boolean)}
+                    />
+                    <Label htmlFor="checksum-verify" className="text-xs cursor-pointer">
+                      Checksum
+                    </Label>
+                  </div>
+                  <Button 
+                    size="sm" 
+                    className="h-8"
+                    onClick={handleProgramUpdate}
+                    disabled={!fileInfo || isUploading}
+                  >
+                    <Upload size={14} className="mr-1" />
+                    프로그램 설정
+                  </Button>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <div className="border border-border bg-card rounded min-h-[200px]">
+            <div className="p-4 space-y-4">
+              <div className="flex justify-between items-center">
+                <Button 
+                  variant="outline" 
+                  size="sm"
+                  disabled={!fileInfo || isUploading}
+                >
+                  프로그램 업데이트
+                </Button>
+                <div className="flex gap-2 text-sm text-muted-foreground">
+                  <span>대기</span>
+                  <span>소요시간</span>
+                </div>
+              </div>
+
+              <div className="space-y-2">
+                <div className="flex justify-between text-sm">
+                  <span className="text-muted-foreground">진행률</span>
+                  <span className="font-['JetBrains_Mono'] font-medium">{uploadProgress}%</span>
+                </div>
+                <Progress value={uploadProgress} className="h-6" />
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div className="px-4 py-2 bg-muted border-t border-border flex justify-between items-center text-sm">
+        <div className="flex items-center gap-4">
+          <span>연결정보 :</span>
+          <span className="font-['JetBrains_Mono']">IP : {connectionIP}</span>
+        </div>
+        <span className="font-['JetBrains_Mono'] text-xs">{lastUpdate}</span>
+      </div>
+    </div>
+  )
+}
+
+export default App

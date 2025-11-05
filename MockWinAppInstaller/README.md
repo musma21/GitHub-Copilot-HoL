@@ -11,15 +11,19 @@ A Proof-of-Concept (PoC) Windows app that simulates a firmware update process us
 - Localized logs and completion messages
 
 All specifications and Copilot guidance are stored under  
-[`MockWinAppInstaller/docs/copilot-instructions.md`](./docs/copilot-instructions.md).
-[`MockWinAppInstaller/docs/spec-from-customer.md`](./docs/spec-from-customer.md).
+[`MockWinAppInstaller/docs/copilot-instructions.md`](./docs/copilot-instructions.md)  
+[`MockWinAppInstaller/docs/spec-from-customer.md`](./docs/spec-from-customer.md)  
+[`MockWinAppInstaller/docs/mock-app-specification-detail.md`](./docs/mock-app-specification-detail.md) – Detailed functional & UI spec (dialogs, persistence, simulation, localization rules).
 > ⚠️ spec-from-customer.md is encypted by git-crypt
 
+ 
 ## 🚀 Goal
+
 Provide a lightweight, scriptable mock environment to iterate on installer UX, localization, and protocol workflow without requiring real devices.
 
 ## 🗂 Directory Structure (src excerpt)
-```
+
+```text
 src/
   App.xaml
   MainWindow.xaml
@@ -29,6 +33,7 @@ src/
 ```
 
 ## 🛠 Tech Stack
+
 - .NET 8
 - WPF
 
@@ -108,4 +113,33 @@ If you split logic into a cross-platform class library (e.g. `MockWinAppInstalle
 - Add basic unit tests
 
 ---
-*This README is an initial placeholder; evolve as architecture and specs grow.*
+\n## ✅ Current Feature Summary (2025-11-05)
+
+| Area | Implemented Details |
+|------|---------------------|
+| Localization | Dynamic culture switch (English/Korean) without restart (ResourceManager + property change) |
+| File Handling | Browse patch file, display size & CRC16 checksum (source) |
+| Patch Simulation | Async chunked copy to `C:\TEMP` with progress bar + completion/reset |
+| Integrity | Destination CRC16 compared to source; mismatch triggers localized error dialog |
+| IP Configuration | Segmented IPv4 entry (4 textboxes), per-octet validation + red highlight + focus on first invalid |
+| IP Persistence | Last 10 IPs stored in `HKCU\Software\MockWinAppInstaller\RecentIps` (MRU order) |
+| USB Gating | Heuristic USB-B detection (removable drive or filtered WMI PnP) disables IP edit when active |
+| Status Messages | All major states localized (idle, progress, complete, mismatch, errors, language failure) |
+| UI Layout Freeze | Agreed layout kept stable; only additive enhancements inside existing regions |
+
+## 🔐 Registry Usage
+
+The application creates/updates `HKCU\Software\MockWinAppInstaller` with a string value `RecentIps` containing comma-separated MRU list (max 10). No other registry writes performed.
+
+\n## 🧪 Future Test Targets
+Minimal tests recommended next:
+\n1. Octet validation (boundary & invalid cases).
+2. CRC16 correctness for a known fixture.
+3. MRU trimming logic (exceeding 10 entries).
+4. USB heuristics (mock WMI searcher wrapper) – optional.
+
+\n## 📄 Session Command Log File
+Daily command summary stored at: `MockWinAppInstaller/docs/session-2025-11-05-commands.txt` (generated on request).
+
+---
+*README updated to reflect current implemented functionality.*
