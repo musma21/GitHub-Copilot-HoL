@@ -1,257 +1,178 @@
-# Customizing GH Copilot Responses
+# Customizing GitHub Copilot Responses
 
-# Copilot Instructions
+짧은 요약:
 
-* Give enough context, get better responses
-* Applied and consumed across \<u>GH Copilot features\</u> such as : 
-  * Copilot **Chat general Q\&A**
-  * Coding **agent task** execution (baseline context)
-  * **Code change / refactor** suggestions (/edit sessions, inline edit)
-  * **Code review** assistance (automated review comments, improvement suggestions)
-    > ℹ️ GH Copilot code review only reads upto \<u>4,000 characters\</u>
-  * **Test** generation / documentation suggestions (uses **build/run/layout** hints)
-  * **Multiple** **model backends** to keep consisitency across models
-* Types of customization
-  * 1\. **Repository custom instruction*****s******&#x20;***&#x66;or the codebase-wide context (*Effectiveness*)
-    1. **Repo-wide :&#x20;**
-       * `ROOT/.github/copilot-instructions.md`
-    2. **Path-specific :** one or more overriding the repo-wide instruction
-       * `.github/instructions/**/NAME.instructions.md`
-    3. **Agent-specific :** can be placed in any path
-       * `AGENTS.md`,`CLAUDE.md`, or`GEMINI.md`
-       > 💡 Still limited to some of GH Copilot features above (as of Nov. 2025)
-       > *"currently not supported by all Copilot features"* <br/>
-       > ℹ️  By default, only `AGENTS.md` just under the root of a repository works
-       > For the multiple `AGENTS.md` 
-  * 2\. **Prompt files** : for instructions to a specific chat interation (*Usability and Efficiency*) 
-    * `*.prompt.md`
-    * No automatic injection; must manually copy/select a line and send
-    > ℹ️  Only available for VS Code and JetBrains (as of Nov. 2025, still in Public Preview) 
-  * Supportability across dev tools - IDE (‼️ *read carefully*)
+- 세 가지 축: Repository Instructions / Path-Specific / Agent Instructions / Prompt Files.
+- 목적: 반복 설명 줄이고 아키텍처·규칙·패턴을 모델이 일관되게 따르게 하기.
+- 가독성과 유지보수: 간결(≤600 words repo-wide), 명확(Imperative style), 중복 제거.
 
-    ![](assets/30oagTyizgv_RTYGH2cnw1byQCofoSY8sqG1kcc-b28=.png)
-    * GH Copilo&#x74;**&#x20;chat in VSCode** understands all types of repository custom instrunctions
-      * but for the agent instructions, only `AGENTS.md` works 
-    * GH Copilot coding **agent in VSCode** reads all types of repository custom instrunctions
-    * GH Copilot **code review in VSCode** takes only the repository-wide instructions
-    * GitHub.com in this context refers to the web-based Github platform
+## 1. Types of Customization
 
+| Type | Scope | Injection | Typical Use |
+|------|-------|-----------|-------------|
+| Repository Instructions (`.github/copilot-instructions.md`) | 전체 코드베이스 | 자동 | 아키텍처, 빌드, 금지 패턴 |
+| Path-Specific (`.github/instructions/*.instructions.md`) | 특정 디렉터리 | 자동 (우선순위 높음) | 서브모듈 규칙, 테스트 방침 |
+| Agent Instructions (`AGENTS.md`) | 역할/스타일 | 자동 (VSCode Chat, 설정 필요) | git-mini, code-mini 등 역할별 응답 형태 |
+| Prompt Files (`*.prompt.md`) | 개별 요청 모음 | 수동(선택/재사용) | 반복 작업(리팩터, 테스트 추가 등) |
 
+> Prompt Files: VSCode/JetBrains (Public Preview). Command Palette 또는 `/파일명` 으로 호출.
 
-# How to use the custom instructons in VSCode
+## 2. Repository Instructions
 
-###### Use a .github/copilot-instructions.md
+작성 원칙:
 
-* Write up `.github/copilot-instructions.md` in the repo root 
-* Enable the ⚙️`github.copilot.chat.codeGeneration.useInstructionFiles` setting
-  > Copy and paste the following URI into the VSCode Command Palette :
-  > `vscode://settings/github.copilot.chat.codeGeneration.useInstructionFiles`
-  ![](assets/UIobj1c-rPtGWRVfJ1nhblSdXWTkjJS8W1G-CMAczaY=.png)
-* After pushing it to the remote repo, it can be listed as reference in GH Copilot chat (web) : 
+- 맨 앞 3–6줄: 언어/프레임워크/빌드/주요 목표.
+- 핵심 명령: install → build → test 순서.
+- “Always” / “Must” 접두사로 필수 단계 표시.
+- 금지/허용 패턴 명확 (예: “No blocking .Result / .Wait”).
 
-  ![](assets/TXg8DwMG52sHMzDlRtZYHTn1OK1YyI5aSHLi0JOGenE=.png)
+설정:
 
-> 💡 GH Copilot understands `#file:path/to/file.ext`, `#folder:path/to/folder`, etc.
+1. 루트에 `.github/copilot-instructions.md` 추가.
+2. VSCode 설정: `github.copilot.chat.codeGeneration.useInstructionFiles` 활성.
+3. Chat에서 참조: `#file:.github/copilot-instructions.md`.
 
-###### Use path specific instructions.md
+## 3. Path-Specific Instructions
 
-* Write up `.github/instructions/NAME.instructions.md`
+목적: 하위 모듈 특수 규칙(예: WPF MVVM / 테스트 요구사항) 오버레이.
+예시 구조:
 
-  ![](assets/agr6KqyQTs-G8mm-0i_JkkLIwQESZuWo3Uo8Ns-znQM=.png)
-  > -**&#x20;MockWinAppInstaller.instructions.md** : path specific baseline 
-  > -**&#x20;MockWinAppInstaller.testing.instructions.md** : for testing
-  > \- **MockWinAppInstaller.pitfalls.instructions.md** : to avoid recurring mistakes 
-  > \- **MockWinAppInstaller.codeing-convention-instructions.md :&#x20;**&#x63;oding convention baseline
-* No additional configuration is needed to use 😜
-* For several specific scenarios such as **Code Review**,**&#x20;Commit message generation**, and **PR** : 
+```text
+.github/instructions/
+  MockWinAppInstaller.instructions.md          # 기본
+  MockWinAppInstaller.testing.instructions.md  # 테스트 전략
+  MockWinAppInstaller.pitfalls.instructions.md # 재발 방지
+  MockWinAppInstaller.coding-convention.instructions.md
+```
+우선순위: Path-Specific > Repository-Wide (해당 경로 내).
 
-  👉 [Specify custom instructions in (VSCode) settings](https://code.visualstudio.com/docs/copilot/customization/custom-instructions#_specify-custom-instructions-in-settings)
+## 4. Agent Instructions (AGENTS.md)
 
-###### Use Agent instructions.md
+설정:
+- VSCode: `chat.useAgentsMdFile`, `chat.useNestedAgentsMdFiles` 활성.
+- 루트 `AGENTS.md` (Nested 다수는 Preview 기능).
 
-* Write up `AGENTS.md` just under the root or in the sub folders (or `CLAUDE.md`, `GEMINI.md`)
-* Enable the ⚙️`chat.useAgentsMdFile` and ⚙️`chat.useNestedAgentsMdFiles` settings
-
-  ![](assets/Y9xIUuxMn7h59_szOMAWkAfwEJKJ83PzodR3_nvy6oo=.png)
-  > Copy and paste the following URI into the VSCode Command Palette :
-  > `vscode://settings/chat.useAgentsMdFile
-  > vscode://settings/chat.useNestedAgentsMdFiles`
-* A sample usage of AGENTS.md
+간단 예:
 
 ```markdown
 Agent: git-mini
-Scope: core git verbs & single-conflict fix. Behavior: terse 1–2 bash lines. Escalate if structural or security impact.
+Scope: core git verbs & single-conflict fix. Behavior: terse 1–2 bash lines.
 
 Agent: term-mini
-Scope: glossary/acronym ≤3 sentences. Behavior: neutral; no links unless asked. Escalate when design/security/perf trade-offs appear.
+Scope: glossary/acronym ≤3 sentences.
 
 Agent: code-mini
-Scope: micro code edits (≤15 changed lines, ≤2 files) or tiny diff clarifications. Behavior: concise patch intent + summary; no deep architecture rationale. Escalate to arch-pro if refactor spans >2 files or introduces pattern. Use when user asks "just fix" or "small patch". Avoid adding deps.
+Scope: micro code edits (≤15 changed lines, ≤2 files).
 
 Agent: arch-pro
-Scope: architecture, refactor, performance (with metrics), security modeling. Behavior: Structured (Problem, Options, Trade-offs, Recommendation, Edge tests).
+Scope: architecture, refactor, performance, security (structured output).
 ```
 
-You can mention the above in GH Copilot chat in VScode (*cmtpsh = commit and push all the changes*): 
-
-![](assets/DG_ahtyl4Za2CbJrT4saXEJFoc9eH1bN3evhC4nJnpY=.png)
-
-###### Use Prompt files (Workspace) 
-
-* Choose the location of the prompt file 
-
-> By default, `.github/prompts/`; if you want to add another : 
-> ⚙️`chat.promptFilesLocations `settings
-> `vscode://settings/chat.promptFilesLocations`
-
-* Create a prompt file in VSCode 
-
-![](assets/d37Xr5-XbzQ2DF_Y-kv0O4iM9ksmqRN3nGoqezHlH4Q=.png)
-
-![](assets/MkPW-MoqiMDwapgodZu-8Pm0BjhwN41-m97CVbQdQjM=.png)
-
-![](assets/SHg6vEFcxL1nh_CYnQXprIJYsZX75MasNtW7Cj5PzY8=.png)
-
-* Manully you can inject the prompth file in various way : 
-
-1. Press the play button in the editor title area
-
-![](assets/i2KBamjnV0rkfPVss-zgXWl9wP3V3Oi01Y40gV-uZI4=.png)
-
-1. Type `/` followed by the prompt file name in the chat 
-
-![](assets/zzHprSLncm3jbOcDXqvNi7x_uBj9ZjjQlX7hcfSuSqQ=.png)
-
-1. Or open the Command Palette ⇧⌘P, **Chat: Run Prompt,&#x20;**&#x61;nd  select the prompt file 
-
-![](assets/LB_BGP94inWOCloB6cTP2iihlHHmDlsqJ3JIQznh76Q=.png)
+사용: Chat에서 `@git-mini`, `@code-mini` 등 직접 언급.
 
 
+## 5. Prompt Files
 
-###### How to sync VSCode settings across multipe devices
+위치: 기본 `.github/prompts/`; 설정으로 추가 경로 확장 (`chat.promptFilesLocations`).
+생성 후 사용 방법:
 
-&#x20;   Simple but very convinient in case of you have more than one dev laptop or VMs
+1. 에디터 상단 ▶ 버튼 클릭.
+2. Chat 입력창 `/파일명` 자동 완성.
+3. 명령 팔레트: “Chat: Run Prompt”.
 
-![](assets/7l8lNSUoeC8PMV8ygpo-2VE6nISPCmFlXOd8SdtYPrk=.png)
+작성 규칙:
 
-![](assets/7MKCUBDM_SLxwuF71Z5Ztzc3aOHN9YVkjX3NmKN5hSw=.png)
+- 한 줄 = 하나의 명령형 작업.
+- 15–30 라인 유지, 50+ 라인 → 정리/아카이브.
+- 길이: 각 라인 ≤160 chars (한국어 ≤100자).
 
+예:
 
+```text
+Refactor #file:src/Services/ChecksumService.cs to use async hashing with cancellation.
+Add tests for #folder:src/ViewModels focusing progress cancellation edge cases.
+Explain DNP vs MODBUS protocol choice for firmware update (trade-offs).
+```
 
-# Best Practices
+## 6. Syncing VSCode Settings Across Devices
 
-###### How to decide what goes in a prompt file vs custom instructions
+VSCode Settings Sync 활성 → Instruction/Prompt 관련 설정 자동 동기화.
+(이미지: VSCode Settings Sync UI)
 
-| **Repository custom instructions**                                                            | **Prompt files**                                                                                                                            |
-| --------------------------------------------------------------------------------------------- | ------------------------------------------------------------------------------------------------------------------------------------------- |
-| Build/test commands everyone must always know                                                 | Specific repeatable tasks (e.g., “Add accessibility attributes”)                                                                            |
-| Coding style rules                                                                            | Concrete refactor/test/documentation requests                                                                                               |
-| Project architecture summary                                                                  | Recurrent ad-hoc actions                                                                                                                    |
-| Prohibited dependencies (such as libraries, package managers, specific versions or framworks) | Specialized transformations (such as bulk update, refactoring, or migratons in which you ca&#x6E;**&#x20;just copy and paste the prompts**) |
+![VSCode Settings Sync UI](assets/7l8lNSUoeC8PMV8ygpo-2VE6nISPCmFlXOd8SdtYPrk=.png "Settings Sync enable screen")
 
-> 🧠 **Andrew's recommendation**: ask your GH copilot if the instruction is well-documented :-) 
+## 7. Best Practices
 
-###### Good length guideline 
+### What Goes Where
 
-* Repository custom instructions
-  * ≤ \~500–600 words total
-  * ≤ 2,000 Korean chars total
-* Prompt files 
-  * Each line ≤ \~160 chars; (≤ \~100 Korean chars)
-  * 15–30 total prompts (prune >50)
+| Put in Instructions | Put in Prompt File |
+|---------------------|--------------------|
+| 규칙·아키텍처·필수 빌드 단계 | 반복 실행 요청 (리팩터, 테스트 생성 등) |
+| 금지 라이브러리 / 패턴 | 특정 파일 단위 변경 지시 |
+| 프로젝트 디렉터리 개요 | 자주 쓰는 분석/검증 명령 |
+| 테스트 범위 전략 | 한 번에 실행 가능한 단일 목적 작업 |
 
+### Length Guidelines
 
-###### Best practice for repository custom instructions
+- Repo Instructions: ≤600 English words 또는 ≤2,000 Korean chars.
+- Prompt File: 유지보수 손쉬운 소형 컬렉션.
 
-| **Category**           | **Best Practice**                                                                              | **Rationale / Effect**                                                  | **Example&#x20;**                                                                                  |
-| ---------------------- | ---------------------------------------------------------------------------------------------- | ----------------------------------------------------------------------- | -------------------------------------------------------------------------------------------------- |
-| Purpose / Overview     | Start with a 3–6 line summary (languages, frameworks, build system, primary goal).             | Gives the model fast, correct context; reduces wrong stack assumptions. | “TypeScript + React monorepo using pnpm workspaces and Vitest; internal design system components.” |
-| Core Commands          | List install / dev / build / test / lint / run commands in verified order.                     | Prevents wrong or outdated command suggestions; reduces exploration.    | “Install: pnpm install → Dev: pnpm dev → Test: pnpm test → Build: pnpm build.”                     |
-| Mandatory Steps        | Prefix non‑skippable steps with a consistent keyword like “Always” / “Must”.                   | Avoids the model treating critical steps as optional.                   | “**Always** run pnpm test before large refactors.”                                                 |
-| Project Structure      | Enumerate only 5–10 key top‑level directories with short purpose notes.                        | Saves tokens; improves accurate path references.                        | “/packages/ui – shared components; /packages/api – REST handlers…”                                 |
-| Style / Coding Rules   | Bullet concise, undisputed rules (preferred & forbidden patterns).                             | Raises generated code quality; lowers review overhead.                  | “React: function components only; Imports: use path aliases; No console.log.”                      |
-| Prohibited Items       | Explicitly list banned package managers, libraries, patterns, weak algorithms.                 | Prevents the model from introducing bad dependencies or insecure code.  | “No yarn, no moment, no axios, no global singletons.”                                              |
-| Testing Strategy       | State coverage focus (edge cases, negative paths, performance) & minimum requirements.         | Reduces trivial tests; increases meaningful suggestions.                | “Include negative input tests, date boundary cases, concurrency scenarios.”                        |
-| Clarification Triggers | Define when the model must ask before acting (schema changes, new deps, build pipeline edits). | Prevents unapproved large or breaking changes.                          | “If a DB schema change is implied → ask for confirmation first.”                                   |
-| Sentence Style         | Use short, declarative, imperative statements; avoid fluff or emotional tone.                  | Reduces token waste; improves parsing consistency.                      | “Prefer native Date APIs.”                                                                         |
-| Length Limit           | Keep to ≤ \~2 pages (\~400–600 words) using bullets.                                           | Avoids truncation; preserves essential info.                            | Concise bullet blocks instead of long paragraphs.                                                  |
-| Exception Handling     | Explicitly state when interactive questioning is required.                                     | Stops silent large destructive changes.                                 | “Ask before large schema migration or adding dependencies.”                                        |
-| Tone Minimization      | Avoid demands for humorous or verbose style.                                                   | Preserves technical focus.                                              | Skip stylistic prose mandates.                                                                     |
-| Limited External Links | Include only essential canonical docs (1–2 links).                                             | Keeps focus on local canonical info.                                    | Link to official framework docs only.                                                              |
+### Style
 
-###### Best practice for prompt files
+- 짧고 명령형: “Prefer async/await; avoid blocking waits.”
+- 중립 톤 → 필요 시 사용자 요청에 따라 변형.
+- 중복 자체 설명(“이 문서는 ~”) 최소화.
 
-| **Category**          | **Best Practice**                                          | **Rationale / Effect**                                                          | **Example&#x20;**                                                                          |
-| --------------------- | ---------------------------------------------------------- | ------------------------------------------------------------------------------- | ------------------------------------------------------------------------------------------ |
-| Structure             | One actionable imperative per line                         | Keeps each request atomic; easy to select & run without ambiguity.              | Rewrite #file:src/utils/date.ts to simplify leap-year logic.                               |
-| Clarity / Goal Focus  | Be specific about goals (“focus on edge cases”)            | Directs model toward higher‑value, deeper coverage instead of generic output.   | Generate unit tests for #file:src/utils/date.ts focusing on leap years and DST boundaries. |
-| Task Framing          | Use incremental verbs (“Refactor”, “Add tests”, “Explain”) | Encourages stepwise, reviewable outputs over massive rewrites.                  | Refactor #file:src/components/Table.tsx to remove duplicated pagination logic.             |
-| Context Anchoring     | Reference concrete targets (#file, #folder)                | Ensures correct context ingestion; reduces hallucinated paths.                  | Add integration tests for #folder:src/auth covering token refresh race conditions.         |
-| Brevity / Scanability | Keep file short (scannable)                                | Increases adoption; users quickly find the right prompt; reduces noise.         | (Maintain ≤ \~1 screenful; prune low‑value lines.)                                         |
-| Maintenance           | Periodically prune obsolete prompts                        | Prevents stale patterns or deprecated APIs from reappearing in new suggestions. | (Remove prompt referencing removed path: #folder:src/legacy)                               |
+### Maintenance Checklist
 
-###### Good samples 
+- [ ] 링크 유효성 (404 제거)
+- [ ] 이미지 alt 텍스트 존재
+- [ ] 중복/타이포 제거 (`prompth`, `consisitency`)
+- [ ] 금지 항목 최신화
+- [ ] Prompt 파일 라인 수 ≤30
+- [ ] 불필요한 HTML 엔티티(`&#x20;`) 없음
 
-* **[Your first custom instructions](https://docs.github.com/en/enterprise-cloud@latest/copilot/tutorials/customization-library/custom-instructions/your-first-custom-instructions)**
+## 8. Examples (Good vs Improved)
 
-  Create and test your first custom instruction with this simple example.
-* **[Concept explainer](https://docs.github.com/en/enterprise-cloud@latest/copilot/tutorials/customization-library/custom-instructions/concept-explainer)**
+### Good (Before)
 
-  Instructions for breaking down complex technical concepts.
-* **[Debugging tutor](https://docs.github.com/en/enterprise-cloud@latest/copilot/tutorials/customization-library/custom-instructions/debugging-tutor)**
+“React components: function components only (no class).”
 
-  Instructions for systematic debugging and troubleshooting.
-* **[Code reviewer](https://docs.github.com/en/enterprise-cloud@latest/copilot/tutorials/customization-library/custom-instructions/code-reviewer)**
+### Improved Pattern
 
-  Instructions for thorough and constructive code reviews.
-* **[GitHub Actions helper](https://docs.github.com/en/enterprise-cloud@latest/copilot/tutorials/customization-library/custom-instructions/github-actions-helper)**
+```text
+React: function components only.
+Imports: use absolute path (no ../../../).
+Async: use async/await; avoid raw Promise chains.
+```
 
-  Generate and improve GitHub Actions workflows.
-* **[Pull request assistant](https://docs.github.com/en/enterprise-cloud@latest/copilot/tutorials/customization-library/custom-instructions/pull-request-assistant)**
+### Bad → Reason → Rephrase
 
-  Generate comprehensive pull request descriptions and reviews.
-* **[Issue manager](https://docs.github.com/en/enterprise-cloud@latest/copilot/tutorials/customization-library/custom-instructions/issue-manager)**
+| Bad | 문제 | Rephrase |
+|-----|------|----------|
+| “Answer all questions in informal style.” | 톤 강제 → 정확성 저하 | “Default: concise technical tone. Switch to casual only if user asks.” |
+| “Use @terminal for Git.” | 조건 없음, 토큰 낭비 | “If user asks for a command (contains ‘run’/‘command’), then show Git CLI.” |
+| “Always conform to styleguide.md in my-repo.” | 과다/불명확 범위 | 구체 bullet로 분해 (위 예처럼). |
 
-  Create well-structured issues and responses.
-* **[Accessibility auditor](https://docs.github.com/en/enterprise-cloud@latest/copilot/tutorials/customization-library/custom-instructions/accessibility-auditor)**
+## 9. Common Pitfalls (Copilot Context)
 
-  Instructions for comprehensive web accessibility testing and compliance.
-* **[Testing automation](https://docs.github.com/en/enterprise-cloud@latest/copilot/tutorials/customization-library/custom-instructions/testing-automation)**
+| Pitfall | Mitigation |
+|---------|------------|
+| Instruction 길이 초과로 핵심 누락 | 글자 수 제한 준수 + 핵심 우선 |
+| Prompt 파일에 문단형 장문 | 한 줄 한 작업으로 재구성 |
+| 다크 테마 스크린샷 가독성 저하 | 밝은 테마 재캡처 + 크롭 + 강조 |
+| 해시형 이미지 파일명 의미 없음 | 차후 의미 기반 이름 재정의 |
 
-  File-specific instructions for writing unit tests.
-* **[Sample AGENTS.md](https://github.com/openai/agents.md)**[ ](https://github.com/openai/agents.md)
+## 10. References
 
-  A minimal example of an AGENTS.md from OpenAI
+- About customizing Copilot responses  
+  <https://docs.github.com/en/enterprise-cloud@latest/copilot/concepts/prompting/response-customization>
+- Customization examples library  
+  <https://docs.github.com/en/enterprise-cloud@latest/copilot/tutorials/customization-library/custom-instructions>
+- Best practices for using GitHub Copilot  
+  <https://docs.github.com/en/enterprise-cloud@latest/copilot/tutorials/coding-agent/get-the-best-results>
+- Adding repository custom instructions  
+  <https://docs.github.com/en/enterprise-cloud@latest/copilot/how-tos/configure-custom-instructions/add-repository-instructions>
+- Soeun Park guide (Korean)  
+  <https://cdn.microbiz.ai/public/GHE/github-copilot-instructions.md-guide.pdf>
 
-###### A bad samples
-
-* **`Always conform to the coding styles defined in styleguide.md in repo my-org/my-repo when generating code`**
-  * If styleguide.md is too long and verbose → GH Copilot could not summarize all the content.
-  * "coding style"? not clear. Is it naming, formatting, calling convention? Ambigous.
-  * styleguide.md in my-repo? Use absolute path. 
-  * 👉 Rephrase : 
-    * `React components: function components only (no class).`
-    * `Use absolute path imports (no ../../../).`
-    * `Prefer async/await; avoid raw Promise chains.`
-* **`Use @terminal when answering questions about Git.`**
-  * @terminal context is expensive, which would consume excessive tokens
-  * No condition is given when to use @terminal. 
-  * 👉 Rephrase : 
-    * `If user explicitly asks for a command (contains words “command” or “how to run”), then show Git CLI examples. Otherwise, explain concept plainly.`
-* **`Answer all questions in the style of a friendly colleague, using informal language.`**
-  * GH Copilot would prioritize the tone and manner rather than accuracy and clarity.
-  * 👉  Rephrase : 
-    * `Default: concise, neutral technical tone. If user explicitly requests a casual explanation, then shift to informal style.`
-* **`Answer all questions in less than 1000 characters, and words of no more than 12 characters.`**
-  * Hard limits which would are not enough to deliver complext technical feedbacks
-  * 👉 Rephrase : 
-    * `Keep explanations concise; avoid unnecessary filler. Summaries under ~200 words unless deep analysis requested.`
-
-# References
-
-* [About customizing GitHub Copilot responses](https://docs.github.com/en/enterprise-cloud@latest/copilot/concepts/prompting/response-customization)
-* [Curated collection of examples](https://docs.github.com/en/enterprise-cloud@latest/copilot/tutorials/customization-library/custom-instructions)
-* [Best practices for using GitHub Copilot](https://docs.github.com/en/enterprise-cloud@latest/copilot/tutorials/coding-agent/get-the-best-results)
-* [Adding repository custom instructions for GitHub Copilot](https://docs.github.com/en/enterprise-cloud@latest/copilot/how-tos/configure-custom-instructions/add-repository-instructions)
-* [Copilot-Instruction 1-pager guide by Soeun Park@MS](https://cdn.microbiz.ai/public/GHE/github-copilot-instructions.md-guide.pdf) (Korean) 
-* [Adding repository custom instructions for GitHub Copilot](https://docs.github.com/en/enterprise-cloud@latest/copilot/how-tos/configure-custom-instructions/add-repository-instructions)
