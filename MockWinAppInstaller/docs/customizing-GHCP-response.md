@@ -20,7 +20,7 @@
     3. **Agent-specific :** can be placed in any path
        * `AGENTS.md`,`CLAUDE.md`, or`GEMINI.md`
        > 💡 Still limited to some of GH Copilot features above (as of Nov. 2025)
-       > *"currently not supported by all Copilot features"*
+       > *"currently not supported by all Copilot features"* <br/>
        > ℹ️  By default, only `AGENTS.md` just under the root of a repository works
        > For the multiple `AGENTS.md` 
   * 2\. **Prompt files** : for instructions to a specific chat interation (*Usability and Efficiency*) 
