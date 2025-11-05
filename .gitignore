@@ -79,3 +79,14 @@ Icon?
 .vscode/.history/
 .vscode/ipch/
 .vscode/configurationCache/
+
+# Visual Studio artifacts
+.vs/
+
+# Additional build artifacts (multi-language)
+node_modules/
+target/
+build/
+dist/
+.pytest_cache/
+__pycache__/
