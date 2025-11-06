@@ -97,7 +97,7 @@ Scope: architecture, refactor, performance, security (structured output).
 
 ## 5. 프롬프트 파일 (Prompt Files)
 
-위치: 기본 `.github/prompts/`; 설정으로 추가 경로 확장 가능 (`chat.promptFilesLocations`).
+위치: 기본 `.github/prompts/`; 설정으로 추가 경로 확장 가능 (`chat.promptFilesLocations`).<br/>
 생성 후 사용 방법 (즉, 수동 주입 방):
 
 1. 에디터 상단 ▶ 버튼 클릭.
@@ -110,7 +110,7 @@ Scope: architecture, refactor, performance, security (structured output).
 - 15–30 라인 유지, 50+ 라인 → 정리/아카이브.
 - 길이: 각 라인 ≤160 chars (한국어 ≤100자).
 
-예:법
+예:
 
 ```text
 Refactor #file:src/Services/ChecksumService.cs to use async hashing with cancellation.
