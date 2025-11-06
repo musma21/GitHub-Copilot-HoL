@@ -1,13 +1,15 @@
 # Customizing GitHub Copilot Responses (English Version)
 
-> For extended background, original examples, and legacy formatting see `customizing-GHCP-response-extended.md`. Below are the instruction assets used in this Hands-on Lab:
+> Navigation: [EN](customizing-GHCP-response-en.md) · [KO](customizing-GHCP-response-ko.md) · [Extended](customizing-GHCP-response-extended.md)
 >
-> - Repository-wide: `.github/copilot-instructions.md`
-> - Path-specific: `.github/instructions/MockWinAppInstaller.instructions.md`, `.github/instructions/MockWinAppInstaller.testing.instructions.md`, `.github/instructions/MockWinAppInstaller.pitfalls.instructions.md`, `.github/instructions/MockWinAppInstaller.codeing-convention-instructions.md`
-> - Agents: `AGENTS.md`
-> - Prompt files location: `.github/prompts/`
+> For extended background, original examples, and legacy formatting see [customizing-GHCP-response-extended.md](customizing-GHCP-response-extended.md). Below are the instruction assets (clickable):
 >
-> If a longer (15+ line) instruction feels unavoidable, split it by intent into smaller imperative bullets (e.g. instead of one "Test strategy" paragraph: "Include boundary values", "Add at least one negative case", "Cover async cancellation paths").
+> - Repository-wide: [`.github/copilot-instructions.md`](../../.github/copilot-instructions.md)
+> - Path-specific: [`MockWinAppInstaller.instructions.md`](../../.github/instructions/MockWinAppInstaller.instructions.md), [`MockWinAppInstaller.testing.instructions.md`](../../.github/instructions/MockWinAppInstaller.testing.instructions.md), [`MockWinAppInstaller.pitfalls.instructions.md`](../../.github/instructions/MockWinAppInstaller.pitfalls.instructions.md), [`MockWinAppInstaller.coding-convention.instructions.md`](../../.github/instructions/MockWinAppInstaller.coding-convention.instructions.md)
+> - Agents: [`AGENTS.md`](../../AGENTS.md)
+> - Prompt files: [`.github/prompts/`](../../.github/prompts/)
+>
+> Tip: If a longer (15+ line) instruction feels unavoidable, split it by intent into smaller imperative bullets (e.g. instead of one "Test strategy" paragraph: "Include boundary values", "Add at least one negative case", "Cover async cancellation paths").
 
 ## Quick Summary
 
@@ -53,7 +55,7 @@ Example structure:
   MockWinAppInstaller.pitfalls.instructions.md # recurring mistakes
   MockWinAppInstaller.coding-convention.instructions.md
 ```
-Precedence: Path-Specific > Repository-wide (within that path).
+\nPrecedence: Path-Specific > Repository-wide (within that path).
 
 ## 4. Agent Instructions (AGENTS.md)
 
@@ -169,7 +171,6 @@ Async: use async/await; avoid raw Promise chains.
 |---------|------------|
 | Instruction overly long → key points lost | Enforce length boundaries + prioritize essentials |
 | Paragraph-style prompt lines | Split into atomic single-line tasks |
-| Dark theme screenshots reduce contrast | Re-capture in light theme + crop + highlight |
 | Hashed image filenames meaningless | Replace with semantic descriptive names |
 
 > Long instructions (15+ lines) degrade summarization and risk partial adherence. Convert them into multiple short bullets grouped by intent (setup, architecture, testing, security), enabling reliable parsing and reuse.

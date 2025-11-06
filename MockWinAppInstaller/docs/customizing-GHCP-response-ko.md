@@ -1,11 +1,13 @@
 # Customizing GitHub Copilot Responses
 
-> 더 상세한 배경과 원본 예시는 `customizing-GHCP-response-extended.md` 문서를 참고하세요. 아래 링크들은 이 Hands-on Lab에서 실제로 사용되는 지침 파일들입니다.
+> 더 상세한 배경과 원본 예시는 [customizing-GHCP-response-extended.md](customizing-GHCP-response-extended.md) 문서를 참고하세요. 아래는 이 Hands-on Lab에서 실제 사용되는 문서/파일들의 빠른 링크입니다.
 >
-> - Repository-wide: `.github/copilot-instructions.md`
-> - Path-specific: `.github/instructions/MockWinAppInstaller.instructions.md`, `.github/instructions/MockWinAppInstaller.testing.instructions.md`, `.github/instructions/MockWinAppInstaller.pitfalls.instructions.md`, `.github/instructions/MockWinAppInstaller.codeing-convention-instructions.md`
-> - Agents: `AGENTS.md`
-> - Prompt files 위치: `.github/prompts/`
+> 언어 버전: [KO](customizing-GHCP-response-ko.md) · [EN](customizing-GHCP-response-en.md) · [Extended](customizing-GHCP-response-extended.md)
+>
+> - Repository-wide: [`.github/copilot-instructions.md`](../../.github/copilot-instructions.md)
+> - Path-specific: [`MockWinAppInstaller.instructions.md`](../../.github/instructions/MockWinAppInstaller.instructions.md), [`MockWinAppInstaller.testing.instructions.md`](../../.github/instructions/MockWinAppInstaller.testing.instructions.md), [`MockWinAppInstaller.pitfalls.instructions.md`](../../.github/instructions/MockWinAppInstaller.pitfalls.instructions.md), [`MockWinAppInstaller.coding-convention.instructions.md`](../../.github/instructions/MockWinAppInstaller.coding-convention.instructions.md)
+> - Agents: [`AGENTS.md`](../../AGENTS.md)
+> - Prompt files 위치: [`.github/prompts/`](../../.github/prompts/)
 
 짧은 요약:
 
@@ -51,7 +53,7 @@
   MockWinAppInstaller.pitfalls.instructions.md # 재발 방지
   MockWinAppInstaller.coding-convention.instructions.md
 ```
-우선순위: Path-Specific > Repository-Wide (해당 경로 내).
+\n우선순위: Path-Specific > Repository-Wide (해당 경로 내).
 
 ## 4. Agent Instructions (AGENTS.md)
 
@@ -61,7 +63,6 @@
 - 루트 `AGENTS.md` (Nested 다수는 Preview 기능).
 
 간단 예:
-
 
 ```markdown
 Agent: git-mini
@@ -169,7 +170,6 @@ Async: use async/await; avoid raw Promise chains.
 |---------|------------|
 | Instruction 길이 초과로 핵심 누락 | 글자 수 제한 준수 + 핵심 우선 |
 | Prompt 파일에 문단형 장문 | 한 줄 한 작업으로 재구성 |
-| 다크 테마 스크린샷 가독성 저하 | 밝은 테마 재캡처 + 크롭 + 강조 |
 | 해시형 이미지 파일명 의미 없음 | 의미 기반 파일명으로 교체 |
 
 > 긴 지침(예: 15줄 이상 서술형)이 불가피할 경우 그대로 넣기보다 목적별로 작게 쪼개어 여러 짧은 bullet/문장으로 나누면 모델이 요약 손실 없이 더 안정적으로 따릅니다. 예: “테스트 전략” 장문의 문단 → “경계값 포함”, “부정 케이스 최소 1개”, “비동기 취소 시나리오 추가” 처럼 분할.
