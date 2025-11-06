@@ -2,7 +2,7 @@
 
 > 더 상세한 배경과 원본 예시는 [customizing-GHCP-response-extended.md](customizing-GHCP-response-extended.md) 문서를 참고. 아래는 이 Hands-on Lab에서 실제 사용되는 문서/파일들의 빠른 링크. (언어 버전: [KO](customizing-GHCP-response-ko.md) · [EN](customizing-GHCP-response-en.md))  
 > - Repository-wide: [`.github/copilot-instructions.md`](../../.github/copilot-instructions.md)
-> - Path-specific: [`MockWinAppInstaller.instructions.md`](../../.github/instructions/MockWinAppInstaller.instructions.md), [`MockWinAppInstaller.testing.instructions.md`](../../.github/instructions/MockWinAppInstaller.testing.instructions.md), [`MockWinAppInstaller.pitfalls.instructions.md`](../../.github/instructions/MockWinAppInstaller.pitfalls.instructions.md), [`MockWinAppInstaller.coding-convention.instructions.md`](../../.github/instructions/MockWinAppInstaller.coding-convention.instructions.md)
+> - Path-specific: [`MockWinAppInstaller.instructions.md`](../../.github/instructions/MockWinAppInstaller.instructions.md), [`MockWinAppInstaller.testing.instructions.md`](../../.github/instructions/MockWinAppInstaller.testing.instructions.md), [`MockWinAppInstaller.pitfalls.instructions.md`](../../.github/instructions/MockWinAppInstaller.pitfalls.instructions.md), [`MockWinAppInstaller.codeing-convention-instructions.md`](../../.github/instructions/MockWinAppInstaller.codeing-convention-instructions.md)
 > - Agents: [`AGENTS.md`](../../AGENTS.md)
 > - Prompt files 위치: [`.github/prompts/`](../../.github/prompts/)
 
@@ -19,9 +19,9 @@
   - 명확 (지시적 명제 Imperative style), 중복 제거
 > - 이 때 "가독성"은 GH Copilot의 입장에서의 가독성, 그러므로 코파일럿에 물어 이해할 수 있는 한 축약하는 것도 좋은 방법
 > - 단, 신규입사자나 인수인계를 위해 사람을 위한 가이드가 필요할 경우, 별도의 문서를 제공할 수도 있음
-  >> [AGENTS-commentary.md](AGENTS-commentary.md)
-  >> [coding-conventions-commentary.md](coding-conventions-commentary.md)
-  >> [coding-instructions-commentary.md](coding-instructions-commentary.md)
+  >> [AGENTS-commentary.md](AGENTS-commentary.md)<br/>
+  >> [coding-conventions-commentary.md](coding-conventions-commentary.md)<br/>
+  >> [coding-instructions-commentary.md](coding-instructions-commentary.md)<br/>
   >> [path-specific-instructions-commentary.md](path-specific-instructions-commentary.md)
 
 ## 1. 종류 (Types of Customization)
@@ -91,13 +91,13 @@ Scope: architecture, refactor, performance, security (structured output).
 ```
 
 사용: Chat에서 `@git-mini`, `@code-mini`와 같이 멘션하고 명령.
-> `@git-mini cmtpsh`
+> `@git-mini cmtpsh`<br/>
 > : `cmtpsh`가 commit and push all local changes 라고 지침에 있을 경우, 간략한 수행 결과만 보고하도록 
 
 
 ## 5. 프롬프트 파일 (Prompt Files)
 
-위치: 기본 `.github/prompts/`; 설정으로 추가 경로 확장 가능 (`chat.promptFilesLocations`).
+위치: 기본 `.github/prompts/`; 설정으로 추가 경로 확장 가능 (`chat.promptFilesLocations`).<br/>
 생성 후 사용 방법 (즉, 수동 주입 방):
 
 1. 에디터 상단 ▶ 버튼 클릭.
@@ -110,7 +110,7 @@ Scope: architecture, refactor, performance, security (structured output).
 - 15–30 라인 유지, 50+ 라인 → 정리/아카이브.
 - 길이: 각 라인 ≤160 chars (한국어 ≤100자).
 
-예:법
+예:
 
 ```text
 Refactor #file:src/Services/ChecksumService.cs to use async hashing with cancellation.
