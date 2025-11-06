@@ -91,7 +91,7 @@ Scope: architecture, refactor, performance, security (structured output).
 ```
 
 사용: Chat에서 `@git-mini`, `@code-mini`와 같이 멘션하고 명령.
-> `@git-mini cmtpsh`
+> `@git-mini cmtpsh`<br/>
 > : `cmtpsh`가 commit and push all local changes 라고 지침에 있을 경우, 간략한 수행 결과만 보고하도록 
 
 
