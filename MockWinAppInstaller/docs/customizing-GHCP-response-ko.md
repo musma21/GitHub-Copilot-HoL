@@ -21,7 +21,7 @@
 > - 단, 신규입사자나 인수인계를 위해 사람을 위한 가이드가 필요할 경우, 별도의 문서를 제공할 수도 있음
   >> [AGENTS-commentary.md](AGENTS-commentary.md)<br/>
   >> [coding-conventions-commentary.md](coding-conventions-commentary.md)<br/>
-  >> [coding-instructions-commentary.md](coding-instructions-commentary.md)<br/>
+  >> [copilot-instructions-commentary.md](copilot-instructions-commentary.md)<br/>
   >> [path-specific-instructions-commentary.md](path-specific-instructions-commentary.md)
 
 ## 1. 종류 (Types of Customization)
