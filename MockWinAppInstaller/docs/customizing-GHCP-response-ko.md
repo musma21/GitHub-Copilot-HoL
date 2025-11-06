@@ -2,7 +2,7 @@
 
 > 더 상세한 배경과 원본 예시는 [customizing-GHCP-response-extended.md](customizing-GHCP-response-extended.md) 문서를 참고. 아래는 이 Hands-on Lab에서 실제 사용되는 문서/파일들의 빠른 링크. (언어 버전: [KO](customizing-GHCP-response-ko.md) · [EN](customizing-GHCP-response-en.md))  
 > - Repository-wide: [`.github/copilot-instructions.md`](../../.github/copilot-instructions.md)
-> - Path-specific: [`MockWinAppInstaller.instructions.md`](../../.github/instructions/MockWinAppInstaller.instructions.md), [`MockWinAppInstaller.testing.instructions.md`](../../.github/instructions/MockWinAppInstaller.testing.instructions.md), [`MockWinAppInstaller.pitfalls.instructions.md`](../../.github/instructions/MockWinAppInstaller.pitfalls.instructions.md), [`MockWinAppInstaller.coding-convention.instructions.md`](../../.github/instructions/MockWinAppInstaller.coding-convention.instructions.md)
+> - Path-specific: [`MockWinAppInstaller.instructions.md`](../../.github/instructions/MockWinAppInstaller.instructions.md), [`MockWinAppInstaller.testing.instructions.md`](../../.github/instructions/MockWinAppInstaller.testing.instructions.md), [`MockWinAppInstaller.pitfalls.instructions.md`](../../.github/instructions/MockWinAppInstaller.pitfalls.instructions.md), [`MockWinAppInstaller.codeing-convention-instructions.md`](../../.github/instructions/MockWinAppInstaller.codeing-convention-instructions.md)
 > - Agents: [`AGENTS.md`](../../AGENTS.md)
 > - Prompt files 위치: [`.github/prompts/`](../../.github/prompts/)
 
