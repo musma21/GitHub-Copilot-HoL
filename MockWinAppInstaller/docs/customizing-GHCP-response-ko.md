@@ -19,9 +19,9 @@
   - 명확 (지시적 명제 Imperative style), 중복 제거
 > - 이 때 "가독성"은 GH Copilot의 입장에서의 가독성, 그러므로 코파일럿에 물어 이해할 수 있는 한 축약하는 것도 좋은 방법
 > - 단, 신규입사자나 인수인계를 위해 사람을 위한 가이드가 필요할 경우, 별도의 문서를 제공할 수도 있음
-  >> [AGENTS-commentary.md](AGENTS-commentary.md)
-  >> [coding-conventions-commentary.md](coding-conventions-commentary.md)
-  >> [coding-instructions-commentary.md](coding-instructions-commentary.md)
+  >> [AGENTS-commentary.md](AGENTS-commentary.md)<br/>
+  >> [coding-conventions-commentary.md](coding-conventions-commentary.md)<br/>
+  >> [coding-instructions-commentary.md](coding-instructions-commentary.md)<br/>
   >> [path-specific-instructions-commentary.md](path-specific-instructions-commentary.md)
 
 ## 1. 종류 (Types of Customization)
