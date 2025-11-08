@@ -89,9 +89,9 @@
                         <!-- Reordered: Label then value on its right -->
                         <TextBlock Grid.Column="3" Text="{Binding Source={StaticResource Loc}, Path=LabelChecksum}" Margin="19,0,5,0" />
                         <TextBlock Grid.Column="4" Text="{Binding ChecksumDisplay}" FontWeight="SemiBold" />
-                        <CheckBox Grid.Column="6" Content="{Binding Source={StaticResource Loc}, Path=LabelMemoryInit}" IsChecked="{Binding IsMemoryInitEnabled}" Grid.ColumnSpan="3" Margin="49,0,99,0" />
-                        <CheckBox Grid.Column="7" Content="{Binding Source={StaticResource Loc}, Path=LabelChecksumToggle}" IsChecked="{Binding IsChecksumEnabled}" Grid.ColumnSpan="2" Margin="140,0,7,0" />
-                        <Button Grid.Column="8" Content="{Binding Source={StaticResource Loc}, Path=ButtonSelectApplication}" Command="{Binding SelectModuleCommand}" Margin="226,-2,14,2" />
+                        <CheckBox Grid.Column="6" Content="{Binding Source={StaticResource Loc}, Path=LabelMemoryInit}" IsChecked="{Binding IsMemoryInitEnabled}" Grid.ColumnSpan="3" Margin="17,0,131,0" />
+                        <CheckBox Grid.Column="7" Content="{Binding Source={StaticResource Loc}, Path=LabelChecksumToggle}" IsChecked="{Binding IsChecksumEnabled}" Grid.ColumnSpan="2" Margin="113,0,34,0" />
+                        <Button Grid.Column="8" Content="{Binding Source={StaticResource Loc}, Path=ButtonSelectApplication}" Command="{Binding SelectModuleCommand}" Margin="199,-2,41,2" />
                     </Grid>
                     <StackPanel Orientation="Horizontal" Margin="0,4,0,0">
                         <TextBlock Text="{Binding Source={StaticResource Loc}, Path=LabelModuleSelect}" Margin="0,0,6,0" />
