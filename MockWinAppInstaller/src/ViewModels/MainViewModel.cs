@@ -203,10 +203,20 @@ namespace MockWinAppInstaller.ViewModels
 
         private void SaveIpDialog()
         {
-            if (!ValidateAllOctets() || !IsValidIPv4(NewIpCandidate))
+            // Re-run validation explicitly before save
+            bool allValid = ValidateAllOctets();
+            bool anyBlank = string.IsNullOrWhiteSpace(NewIpOctet1) || string.IsNullOrWhiteSpace(NewIpOctet2) || string.IsNullOrWhiteSpace(NewIpOctet3) || string.IsNullOrWhiteSpace(NewIpOctet4);
+            if (anyBlank)
             {
-                System.Windows.MessageBox.Show(_loc?.IpDialogInvalid ?? "Invalid IP", _loc?.IpDialogTitle ?? "IP Settings", System.Windows.MessageBoxButton.OK, System.Windows.MessageBoxImage.Warning);
-                FocusFirstInvalidOctet();
+                System.Windows.MessageBox.Show(_loc?.IpDialogErrorBlankOctet ?? "One or more IP octets are blank.", _loc?.IpDialogTitle ?? "IP Settings", System.Windows.MessageBoxButton.OK, System.Windows.MessageBoxImage.Warning);
+                FocusFirstInvalidOrBlankOctet();
+                return;
+            }
+            // Validate overall IPv4 format
+            if (!allValid || !IsValidIPv4(NewIpCandidate))
+            {
+                System.Windows.MessageBox.Show(_loc?.IpDialogErrorInvalidIp ?? _loc?.IpDialogInvalid ?? "Invalid IP address format.", _loc?.IpDialogTitle ?? "IP Settings", System.Windows.MessageBoxButton.OK, System.Windows.MessageBoxImage.Warning);
+                FocusFirstInvalidOrBlankOctet();
                 return;
             }
             ConnectionIp = NewIpCandidate;
@@ -255,6 +265,18 @@ namespace MockWinAppInstaller.ViewModels
                 else if (IsOctet2Invalid) focusTarget = win.FindName("Octet2Box") as System.Windows.Controls.TextBox;
                 else if (IsOctet3Invalid) focusTarget = win.FindName("Octet3Box") as System.Windows.Controls.TextBox;
                 else if (IsOctet4Invalid) focusTarget = win.FindName("Octet4Box") as System.Windows.Controls.TextBox;
+                focusTarget?.Focus();
+            }
+        }
+        private void FocusFirstInvalidOrBlankOctet()
+        {
+            if (_activeDialog is MockWinAppInstaller.IpSettingsWindow win)
+            {
+                System.Windows.Controls.TextBox? focusTarget = null;
+                if (string.IsNullOrWhiteSpace(NewIpOctet1) || IsOctet1Invalid) focusTarget = win.FindName("Octet1Box") as System.Windows.Controls.TextBox;
+                else if (string.IsNullOrWhiteSpace(NewIpOctet2) || IsOctet2Invalid) focusTarget = win.FindName("Octet2Box") as System.Windows.Controls.TextBox;
+                else if (string.IsNullOrWhiteSpace(NewIpOctet3) || IsOctet3Invalid) focusTarget = win.FindName("Octet3Box") as System.Windows.Controls.TextBox;
+                else if (string.IsNullOrWhiteSpace(NewIpOctet4) || IsOctet4Invalid) focusTarget = win.FindName("Octet4Box") as System.Windows.Controls.TextBox;
                 focusTarget?.Focus();
             }
         }

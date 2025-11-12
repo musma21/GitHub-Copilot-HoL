@@ -106,6 +106,8 @@ namespace MockWinAppInstaller.Services
     public string IpDialogSave => Get("IpDialog_Save");
     public string IpDialogCancel => Get("IpDialog_Cancel");
     public string IpDialogInvalid => Get("IpDialog_Invalid");
+    public string IpDialogErrorBlankOctet => Get("IpDialog_ErrorBlankOctet");
+    public string IpDialogErrorInvalidIp => Get("IpDialog_ErrorInvalidIp");
     public string IpDialogUsbUse => Get("IpDialog_UsbUse");
     public string IpDialogUsbNotConnected => Get("IpDialog_UsbNotConnected");
 

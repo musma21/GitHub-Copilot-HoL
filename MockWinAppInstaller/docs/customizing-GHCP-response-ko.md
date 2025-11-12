@@ -22,7 +22,11 @@
   >> [AGENTS-commentary.md](AGENTS-commentary.md)<br/>
   >> [coding-conventions-commentary.md](coding-conventions-commentary.md)<br/>
   >> [copilot-instructions-commentary.md](copilot-instructions-commentary.md)<br/>
-  >> [path-specific-instructions-commentary.md](path-specific-instructions-commentary.md):
+  >> [path-specific-instructions-commentary.md](path-specific-instructions-commentary.md)
+
+> 💡 Organization 레벨의 지침도 적용 가능 (Preview as of Nov. 12, 2025)<br/>
+> 👉 [ Adding organization custom instructions for GitHub Copilot ](https://docs.github.com/en/copilot/how-tos/configure-custom-instructions/add-organization-instructions) <br/>
+> ⚙️ Org Owner 권한의 사용자 프로필에서 "Feature Preview" 선택 후 "Organization Custom Instruction" 활성화
 
 ## 1. 종류 (Types of Customization)
 

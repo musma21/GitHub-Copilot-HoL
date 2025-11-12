@@ -41,6 +41,8 @@
   <data name="IpDialog_Save" xml:space="preserve"><value>Save</value></data>
   <data name="IpDialog_Cancel" xml:space="preserve"><value>Cancel</value></data>
   <data name="IpDialog_Invalid" xml:space="preserve"><value>Invalid IP format</value></data>
+  <data name="IpDialog_ErrorBlankOctet" xml:space="preserve"><value>One or more IP octets are blank.</value></data>
+  <data name="IpDialog_ErrorInvalidIp" xml:space="preserve"><value>Invalid IP address format.</value></data>
   <data name="IpDialog_UsbUse" xml:space="preserve"><value>Use USB</value></data>
   <data name="IpDialog_UsbNotConnected" xml:space="preserve"><value>USB device not detected</value></data>
 </root>
