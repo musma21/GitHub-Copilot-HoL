@@ -113,7 +113,7 @@ If you split logic into a cross-platform class library (e.g. `MockWinAppInstalle
 - Add basic unit tests
 
 ---
-\n## ✅ Current Feature Summary (2025-11-05)
+✅ Current Feature Summary (2025-11-05)
 
 | Area | Implemented Details |
 |------|---------------------|
@@ -127,18 +127,29 @@ If you split logic into a cross-platform class library (e.g. `MockWinAppInstalle
 | Status Messages | All major states localized (idle, progress, complete, mismatch, errors, language failure) |
 | UI Layout Freeze | Agreed layout kept stable; only additive enhancements inside existing regions |
 
+**Demo & Screenshots:**
+
+- [Demo Video](docs/assets/MockAppWinInstaller-shorten.mp4)
+
+![IP Detection & Localization](docs/assets/ip-detection-and-locaization.png)
+
+![IP Config USB Gating](docs/assets/ip-config-usb-gating.png)
+
+![File Handling & Checksum](docs/assets/file-handling-and-checksum.png)
+
 ## 🔐 Registry Usage
 
 The application creates/updates `HKCU\Software\MockWinAppInstaller` with a string value `RecentIps` containing comma-separated MRU list (max 10). No other registry writes performed.
 
-\n## 🧪 Future Test Targets
+🧪 Future Test Targets
 Minimal tests recommended next:
 \n1. Octet validation (boundary & invalid cases).
 2. CRC16 correctness for a known fixture.
 3. MRU trimming logic (exceeding 10 entries).
 4. USB heuristics (mock WMI searcher wrapper) – optional.
 
-\n## 📄 Session Command Log File
+## 📄 Session Command Log File
+
 Daily command summary stored at: `MockWinAppInstaller/docs/session-2025-11-05-commands.txt` (generated on request).
 
 ---

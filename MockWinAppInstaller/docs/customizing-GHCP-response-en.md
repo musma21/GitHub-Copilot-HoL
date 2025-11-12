@@ -27,6 +27,10 @@ Short summary:
 > - [copilot-instructions-commentary.md](copilot-instructions-commentary.md)
 > - [path-specific-instructions-commentary.md](path-specific-instructions-commentary.md)
 
+> 💡 Organization-level instructions are also available (Preview as of Nov. 12, 2025)<br/>
+> 👉 [Adding organization custom instructions for GitHub Copilot](https://docs.github.com/en/copilot/how-tos/configure-custom-instructions/add-organization-instructions)<br/>
+> ⚙️ Org Owner: enable "Organization Custom Instruction" in user profile "Feature Preview"
+
 ## 1. Types of Customization
 
 | Type | Scope | Injection | Typical Use |

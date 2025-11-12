@@ -22,7 +22,7 @@
   >> [AGENTS-commentary.md](AGENTS-commentary.md)<br/>
   >> [coding-conventions-commentary.md](coding-conventions-commentary.md)<br/>
   >> [copilot-instructions-commentary.md](copilot-instructions-commentary.md)<br/>
-  >> [path-specific-instructions-commentary.md](path-specific-instructions-commentary.md)
+  >> [path-specific-instructions-commentary.md](path-specific-instructions-commentary.md):
 
 ## 1. 종류 (Types of Customization)
 
