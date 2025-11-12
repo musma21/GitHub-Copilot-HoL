@@ -129,7 +129,7 @@ If you split logic into a cross-platform class library (e.g. `MockWinAppInstalle
 
 **Demo & Screenshots:**
 
-- [Demo Video](docs/assets/MockAppWinInstaller-shorten.mp4)
+- [Demo Video](https://cdn.microbiz.ai/public/GHE/MockAppWinInstaller-shorten.mp4)
 
 ![IP Detection & Localization](docs/assets/ip-detection-and-locaization.png)
 
